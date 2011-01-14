@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+	bootstrap="bootstrap.php"
+	colors="true"
+>
+	<testsuites>
+		<testsuite name="AllTests">
+			<directory>Framework</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../lib</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<!-- HTML Code Coverage -->
+		<log type="coverage-html" target="./logs/coverage" charset="UTF-8"
+			yui="true" highlight="false" />
+		<log type="coverage-xml" target="./logs/coverage/coverage.xml"/>
+		<!-- Unit Tests Documentation Generation -->
+		<log type="testdox-html" target="./logs/testdox/index.html"/>
+	</logging>
+</phpunit>
