@@ -15,3 +15,8 @@ set_include_path(
 	$cfg['pear_path']
 );
 
+
+require_once 'Framework/Autoloader.php';
+$autoloader = new \Framework\Autoloader();
+$autoloader->addNamespace('Framework', 'Framework/');
+spl_autoload_register(array($autoloader, 'classLoader'));

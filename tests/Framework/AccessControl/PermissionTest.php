@@ -6,8 +6,6 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-require_once 'Framework/AccessControl/Permission.php';
-
 use
 	\Framework\AccessControl\Permission
 ;

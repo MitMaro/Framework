@@ -6,9 +6,6 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-require_once 'Framework/AccessControl/Role.php';
-require_once 'Framework/AccessControl/User.php';
-
 use
 	\Framework\AccessControl\Role,
 	\Framework\AccessControl\User
