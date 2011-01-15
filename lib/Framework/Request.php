@@ -7,8 +7,8 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  * @dependencies
  * <ul>
- * <li>\Framework\Action</li>
- * <li>\Framework\Session (Optional)</li>
+ *     <li>\Framework\Controller</li>
+ *     <li>\Framework\Session (Optional)</li>
  * </ul>
  */
 
