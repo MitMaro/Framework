@@ -1,0 +1,4 @@
+config.php
+logs/
+logs/coverage/*
+logs//testdox/*
