@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+
+<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+<link rel="start" href="../../../overview-summary.html">
+
+<title>Framework/Logic/Statement.php (PHPDoctor)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../../overview-files.html">Files</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../todo-list.html">Todo</a></li>
+<li><a href="../../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../../index.html" target="_top">Frames</a>
+<a href="../../../source/framework/logic/statement.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>Framework/Logic/Statement.php</h1>
+<hr>
+
+<a name="line1"></a><pre><?php
+<a name="line2"></a>/**
+<a name="line3"></a> * @package  Framework\Logic
+<a name="line4"></a> * @version  0.1.0
+<a name="line5"></a> * @author  Tim Oram (mitmaro@mitmaro.ca)
+<a name="line6"></a> * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
+<a name="line7"></a> * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
+<a name="line8"></a> */
+<a name="line9"></a>
+<a name="line10"></a>namespace Framework\Logic;
+<a name="line11"></a>
+<a name="line12"></a>use
+<a name="line13"></a>	Framework\Logic\ExpressionInterface,
+<a name="line14"></a>	Framework\Logic\OperatorInterface
+<a name="line15"></a>;
+<a name="line16"></a>
+<a name="line17"></a>class Statement implements ExpressionInterface {
+<a name="line18"></a>	
+<a name="line19"></a>	/**
+<a name="line20"></a>	 * The left expression
+<a name="line21"></a>	 *
+<a name="line22"></a>	 * @var ExpressionInterface
+<a name="line23"></a>	 */
+<a name="line24"></a>	protected $left;
+<a name="line25"></a>	
+<a name="line26"></a>	/**
+<a name="line27"></a>	 * The right expression
+<a name="line28"></a>	 *
+<a name="line29"></a>	 * @var ExpressionInterface
+<a name="line30"></a>	 */
+<a name="line31"></a>	protected $right;
+<a name="line32"></a>	
+<a name="line33"></a>	/**
+<a name="line34"></a>	 * The operator to perform
+<a name="line35"></a>	 *
+<a name="line36"></a>	 * @var OperatorInterface
+<a name="line37"></a>	 */
+<a name="line38"></a>	protected $operator;
+<a name="line39"></a>	
+<a name="line40"></a>	/**
+<a name="line41"></a>	 * The cached value of this statement
+<a name="line42"></a>	 *
+<a name="line43"></a>	 * @var mixed
+<a name="line44"></a>	 */
+<a name="line45"></a>	protected $cachedValue = null;
+<a name="line46"></a>	
+<a name="line47"></a>	/**
+<a name="line48"></a>	 * Make a new statement consisting of a operator and a left and right expression
+<a name="line49"></a>	 *
+<a name="line50"></a>	 * @param OperatorInterface $operator An operator
+<a name="line51"></a>	 * @param ExpressionInterface $left The left side expression
+<a name="line52"></a>	 * @param ExpressionInterface $right The right side expression
+<a name="line53"></a>	 */
+<a name="line54"></a>	public function __construct(OperatorInterface $operator, ExpressionInterface $left, ExpressionInterface $right = null) {
+<a name="line55"></a>		$this->operator = $operator;
+<a name="line56"></a>		$this->left = $left;
+<a name="line57"></a>		$this->right = $right;
+<a name="line58"></a>	}
+<a name="line59"></a>	
+<a name="line60"></a>	/**
+<a name="line61"></a>	 * Get the left side expression
+<a name="line62"></a>	 *
+<a name="line63"></a>	 * @return ExpressionInterface
+<a name="line64"></a>	 */
+<a name="line65"></a>	public function getLeftExpression() {
+<a name="line66"></a>		return $this->left;
+<a name="line67"></a>	}
+<a name="line68"></a>	
+<a name="line69"></a>	/**
+<a name="line70"></a>	 * Get the right side expression
+<a name="line71"></a>	 *
+<a name="line72"></a>	 * @return ExpressionInterface
+<a name="line73"></a>	 */
+<a name="line74"></a>	public function getRightExpression() {
+<a name="line75"></a>		return $this->right;
+<a name="line76"></a>	}
+<a name="line77"></a>	
+<a name="line78"></a>	/**
+<a name="line79"></a>	 * Get the operator
+<a name="line80"></a>	 *
+<a name="line81"></a>	 * @return OperatorInterface
+<a name="line82"></a>	 */
+<a name="line83"></a>	public function getOperator() {
+<a name="line84"></a>		return $this->operator;
+<a name="line85"></a>	}
+<a name="line86"></a>	
+<a name="line87"></a>	/**
+<a name="line88"></a>	 * Evaluate the statement
+<a name="line89"></a>	 *
+<a name="line90"></a>	 * @return mixed The result of the evaluation
+<a name="line91"></a>	 */
+<a name="line92"></a>	public function evaluate() {
+<a name="line93"></a>		// check for a cached value
+<a name="line94"></a>		if (is_null($this->cachedValue)) {
+<a name="line95"></a>			$this->cachedValue = $this->operator->execute($this->left, $this->right);
+<a name="line96"></a>		}
+<a name="line97"></a>		return $this->cachedValue;
+<a name="line98"></a>	}
+<a name="line99"></a>}
+<a name="line100"></a></pre>
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../../overview-files.html">Files</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../todo-list.html">Todo</a></li>
+<li><a href="../../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../../index.html" target="_top">Frames</a>
+<a href="../../../source/framework/logic/statement.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

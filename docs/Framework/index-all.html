@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 01:29:58 +0000">
+<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
 
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 <link rel="start" href="overview-summary.html">
@@ -41,27 +41,42 @@
 <a href="#letterG">G</a>
 <a href="#letterH">H</a>
 <a href="#letterI">I</a>
+<a href="#letterL">L</a>
 <a href="#letterM">M</a>
+<a href="#letterN">N</a>
+<a href="#letterO">O</a>
 <a href="#letterP">P</a>
 <a href="#letterR">R</a>
 <a href="#letterS">S</a>
+<a href="#letterT">T</a>
 <a href="#letterU">U</a>
 <a href="#letterV">V</a>
 <hr>
 
 <h1 id="letter_">_</h1>
 <dl>
-<dt><a href="framework/session/session.html#__construct()">__construct()</a> - Method in class <a href="framework/session/session.html">Framework\Session\Session</a></dt>
 <dt><a href="framework/accesscontrol/resource.html#__construct()">__construct()</a> - Method in class <a href="framework/accesscontrol/resource.html">Framework\AccessControl\Resource</a></dt>
 <dd>Constructs a resource with the given resource id</dd>
-<dt><a href="framework/accesscontrol/user.html#__construct()">__construct()</a> - Method in class <a href="framework/accesscontrol/user.html">Framework\AccessControl\User</a></dt>
-<dd>Constructs a user with the given id</dd>
-<dt><a href="framework/controller.html#__construct()">__construct()</a> - Method in class <a href="framework/controller.html">Framework\Controller</a></dt>
-<dd></dd>
-<dt><a href="framework/accesscontrol/permission.html#__construct()">__construct()</a> - Method in class <a href="framework/accesscontrol/permission.html">Framework\AccessControl\Permission</a></dt>
-<dd>Constructs a permission with the given id</dd>
 <dt><a href="framework/accesscontrol/role.html#__construct()">__construct()</a> - Method in class <a href="framework/accesscontrol/role.html">Framework\AccessControl\Role</a></dt>
 <dd>Constructs a role with the given id</dd>
+<dt><a href="framework/accesscontrol/user.html#__construct()">__construct()</a> - Method in class <a href="framework/accesscontrol/user.html">Framework\AccessControl\User</a></dt>
+<dd>Constructs a user with the given id</dd>
+<dt><a href="framework/logic/type/string.html#__construct()">__construct()</a> - Method in class <a href="framework/logic/type/string.html">Framework\Logic\Type\String</a></dt>
+<dd>Creates a string out of the given value</dd>
+<dt><a href="framework/logic/statement.html#__construct()">__construct()</a> - Method in class <a href="framework/logic/statement.html">Framework\Logic\Statement</a></dt>
+<dd>Make a new statement consisting of a operator and a left and right expression</dd>
+<dt><a href="framework/accesscontrol/permission.html#__construct()">__construct()</a> - Method in class <a href="framework/accesscontrol/permission.html">Framework\AccessControl\Permission</a></dt>
+<dd>Constructs a permission with the given id</dd>
+<dt><a href="framework/session/session.html#__construct()">__construct()</a> - Method in class <a href="framework/session/session.html">Framework\Session\Session</a></dt>
+<dt><a href="framework/logic/type/integer.html#__construct()">__construct()</a> - Method in class <a href="framework/logic/type/integer.html">Framework\Logic\Type\Integer</a></dt>
+<dd>Creates a integer out of the given value</dd>
+<dt><a href="framework/logic/type/boolean.html#__construct()">__construct()</a> - Method in class <a href="framework/logic/type/boolean.html">Framework\Logic\Type\Boolean</a></dt>
+<dd>Creates a boolean out of the given value</dd>
+<dt><a href="framework/logic/type/base.html#__construct()">__construct()</a> - Method in class <a href="framework/logic/type/base.html">Framework\Logic\Type\Base</a></dt>
+<dt><a href="framework/logic/type/float.html#__construct()">__construct()</a> - Method in class <a href="framework/logic/type/float.html">Framework\Logic\Type\Float</a></dt>
+<dd>Creates a float out of the given value</dd>
+<dt><a href="framework/controller.html#__construct()">__construct()</a> - Method in class <a href="framework/controller.html">Framework\Controller</a></dt>
+<dd></dd>
 </dl>
 <h1 id="letterA">A</h1>
 <dl>
@@ -71,10 +86,10 @@
 <dd>Adds a namespace, directory key value pair</dd>
 <dt><a href="framework/request.html#addParam()">addParam()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
 <dd>Add a parameter to the list of parameters</dd>
-<dt><a href="framework/accesscontrol/resource.html#addPermissions()">addPermissions()</a> - Method in class <a href="framework/accesscontrol/resource.html">Framework\AccessControl\Resource</a></dt>
-<dd>Adds permissions to the resource.</dd>
 <dt><a href="framework/accesscontrol/role.html#addPermissions()">addPermissions()</a> - Method in class <a href="framework/accesscontrol/role.html">Framework\AccessControl\Role</a></dt>
 <dd>Adds permissions to the role.</dd>
+<dt><a href="framework/accesscontrol/resource.html#addPermissions()">addPermissions()</a> - Method in class <a href="framework/accesscontrol/resource.html">Framework\AccessControl\Resource</a></dt>
+<dd>Adds permissions to the resource.</dd>
 <dt><a href="framework/accesscontrol.html#addResource()">addResource()</a> - Method in class <a href="framework/accesscontrol.html">Framework\AccessControl</a></dt>
 <dd>Adds a resource</dd>
 <dt><a href="framework/accesscontrol.html#addResourcePermissions()">addResourcePermissions()</a> - Method in class <a href="framework/accesscontrol.html">Framework\AccessControl</a></dt>
@@ -83,14 +98,20 @@
 <dd>Adds a role to this user</dd>
 <dt><a href="framework/request.html#addUrlPatterns()">addUrlPatterns()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
 <dd>Adds patterns to the url pattern mapper</dd>
+<dt><a href="framework/logic/operator/andoperator.html">AndOperator()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
 <dt><a href="framework/accesscontrol/autoloader.html">Autoloader()</a> - Class in namespace <a href="framework/accesscontrol/package-summary.html">Framework\AccessControl</a></dt>
 <dd>A simple yet powerful namespace based autoloader for php.
 </dd>
 </dl>
 <h1 id="letterB">B</h1>
 <dl>
+<dt><a href="framework/logic/type/base.html">Base()</a> - Class in namespace <a href="framework/logic/type/package-summary.html">Framework\Logic\Type</a></dt>
+<dd></dd>
 <dt><a href="framework/request.html#beginRequest()">beginRequest()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
 <dd>Handle a request</dd>
+<dt><a href="framework/logic/type/boolean.html">Boolean()</a> - Class in namespace <a href="framework/logic/type/package-summary.html">Framework\Logic\Type</a></dt>
+<dd></dd>
 </dl>
 <h1 id="letterC">C</h1>
 <dl>
@@ -109,15 +130,51 @@
 <dl>
 <dt><a href="framework/strings.html#endsWith()">endsWith()</a> - Method in class <a href="framework/strings.html">Framework\Strings</a></dt>
 <dd>Check if the haystack string ends with the needle</dd>
+<dt><a href="framework/logic/operator/equals.html">Equals()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/statement.html#evaluate()">evaluate()</a> - Method in class <a href="framework/logic/statement.html">Framework\Logic\Statement</a></dt>
+<dd>Evaluate the statement</dd>
+<dt><a href="framework/logic/expressioninterface.html#evaluate()">evaluate()</a> - Method in class <a href="framework/logic/expressioninterface.html">Framework\Logic\ExpressionInterface</a></dt>
+<dd>Evaluate the expression</dd>
+<dt><a href="framework/logic/type/base.html#evaluate()">evaluate()</a> - Method in class <a href="framework/logic/type/base.html">Framework\Logic\Type\Base</a></dt>
+<dd>The evaluation of a type is it's value</dd>
+<dt><a href="framework/request/exception.html">Exception()</a> - Class in namespace <a href="framework/request/package-summary.html">Framework\Request</a></dt>
+<dd></dd>
 <dt><a href="framework/accesscontrol/exception.html">Exception()</a> - Class in namespace <a href="framework/accesscontrol/package-summary.html">Framework\AccessControl</a></dt>
 <dd></dd>
-<dt><a href="framework/request/exception.html">Exception()</a> - Class in namespace <a href="framework/request/package-summary.html">Framework\Request</a></dt>
+<dt><a href="framework/logic/operator/notidentical.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/notidentical.html">Framework\Logic\Operator\NotIdentical</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/notoperator.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/notoperator.html">Framework\Logic\Operator\NotOperator</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operatorinterface.html#execute()">execute()</a> - Method in class <a href="framework/logic/operatorinterface.html">Framework\Logic\OperatorInterface</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/notequals.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/notequals.html">Framework\Logic\Operator\NotEquals</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/oroperator.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/oroperator.html">Framework\Logic\Operator\OrOperator</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/lessthan.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/lessthan.html">Framework\Logic\Operator\LessThan</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/greaterequalthan.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/greaterequalthan.html">Framework\Logic\Operator\GreaterEqualThan</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/lessequalthan.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/lessequalthan.html">Framework\Logic\Operator\LessEqualThan</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/equals.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/equals.html">Framework\Logic\Operator\Equals</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/greaterthan.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/greaterthan.html">Framework\Logic\Operator\GreaterThan</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/identical.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/identical.html">Framework\Logic\Operator\Identical</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/operator/andoperator.html#execute()">execute()</a> - Method in class <a href="framework/logic/operator/andoperator.html">Framework\Logic\Operator\AndOperator</a></dt>
+<dd>Execute the operator on the expressions</dd>
+<dt><a href="framework/logic/expressioninterface.html">ExpressionInterface()</a> - Interface in namespace <a href="framework/logic/package-summary.html">Framework\Logic</a></dt>
 <dd></dd>
 </dl>
 <h1 id="letterF">F</h1>
 <dl>
 <dt><a href="framework/accesscontrol/autoloader.html#fileExists()">fileExists()</a> - Method in class <a href="framework/accesscontrol/autoloader.html">Framework\AccessControl\Autoloader</a></dt>
 <dd>Check if a file can be found on the include path</dd>
+<dt><a href="framework/logic/type/float.html">Float()</a> - Class in namespace <a href="framework/logic/type/package-summary.html">Framework\Logic\Type</a></dt>
+<dd></dd>
 </dl>
 <h1 id="letterG">G</h1>
 <dl>
@@ -129,19 +186,23 @@
 <dd>Gets all values saved in the session</dd>
 <dt><a href="framework/accesscontrol.html#getDefaultAccess()">getDefaultAccess()</a> - Method in class <a href="framework/accesscontrol.html">Framework\AccessControl</a></dt>
 <dd>Get default access</dd>
-<dt><a href="framework/accesscontrol/resource.html#getId()">getId()</a> - Method in class <a href="framework/accesscontrol/resource.html">Framework\AccessControl\Resource</a></dt>
-<dd>Get the unique identifier for the resource</dd>
-<dt><a href="framework/accesscontrol/role.html#getId()">getId()</a> - Method in class <a href="framework/accesscontrol/role.html">Framework\AccessControl\Role</a></dt>
-<dd>Get the unique identifier for the role</dd>
 <dt><a href="framework/accesscontrol/permission.html#getId()">getId()</a> - Method in class <a href="framework/accesscontrol/permission.html">Framework\AccessControl\Permission</a></dt>
 <dd>Get the unique identifier for the permission</dd>
+<dt><a href="framework/accesscontrol/role.html#getId()">getId()</a> - Method in class <a href="framework/accesscontrol/role.html">Framework\AccessControl\Role</a></dt>
+<dd>Get the unique identifier for the role</dd>
 <dt><a href="framework/accesscontrol/user.html#getId()">getId()</a> - Method in class <a href="framework/accesscontrol/user.html">Framework\AccessControl\User</a></dt>
+<dt><a href="framework/accesscontrol/resource.html#getId()">getId()</a> - Method in class <a href="framework/accesscontrol/resource.html">Framework\AccessControl\Resource</a></dt>
+<dd>Get the unique identifier for the resource</dd>
+<dt><a href="framework/logic/statement.html#getLeftExpression()">getLeftExpression()</a> - Method in class <a href="framework/logic/statement.html">Framework\Logic\Statement</a></dt>
+<dd>Get the left side expression</dd>
 <dt><a href="framework/session/session.html#getNamespace()">getNamespace()</a> - Method in class <a href="framework/session/session.html">Framework\Session\Session</a></dt>
 <dd>Gets the global (application) session namespace</dd>
 <dt><a href="framework/accesscontrol/autoloader.html#getNamespaceMap()">getNamespaceMap()</a> - Method in class <a href="framework/accesscontrol/autoloader.html">Framework\AccessControl\Autoloader</a></dt>
 <dd>Returns the namespace map array</dd>
 <dt><a href="framework/session/session.html#getOnce()">getOnce()</a> - Method in class <a href="framework/session/session.html">Framework\Session\Session</a></dt>
 <dd>Gets a variable saved as a one time variable in the previous session</dd>
+<dt><a href="framework/logic/statement.html#getOperator()">getOperator()</a> - Method in class <a href="framework/logic/statement.html">Framework\Logic\Statement</a></dt>
+<dd>Get the operator</dd>
 <dt><a href="framework/request.html#getParam()">getParam()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
 <dd>Get a single parameter from the request</dd>
 <dt><a href="framework/request.html#getParams()">getParams()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
@@ -156,12 +217,22 @@
 <dd>Return the request attached to the controller</dd>
 <dt><a href="framework/accesscontrol.html#getResources()">getResources()</a> - Method in class <a href="framework/accesscontrol.html">Framework\AccessControl</a></dt>
 <dd>Get the array of resources</dd>
+<dt><a href="framework/logic/statement.html#getRightExpression()">getRightExpression()</a> - Method in class <a href="framework/logic/statement.html">Framework\Logic\Statement</a></dt>
+<dd>Get the right side expression</dd>
 <dt><a href="framework/accesscontrol/user.html#getRoles()">getRoles()</a> - Method in class <a href="framework/accesscontrol/user.html">Framework\AccessControl\User</a></dt>
 <dd>Get the roles associated with this user.</dd>
 <dt><a href="framework/request.html#getUrlPatternMap()">getUrlPatternMap()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
 <dd>Get the url patterns</dd>
+<dt><a href="framework/logic/typeinterface.html#getValue()">getValue()</a> - Method in class <a href="framework/logic/typeinterface.html">Framework\Logic\TypeInterface</a></dt>
+<dd>Gets the php value</dd>
+<dt><a href="framework/logic/type/base.html#getValue()">getValue()</a> - Method in class <a href="framework/logic/type/base.html">Framework\Logic\Type\Base</a></dt>
+<dd>Get the php value of the object</dd>
 <dt><a href="framework/controller.html#getView()">getView()</a> - Method in class <a href="framework/controller.html">Framework\Controller</a></dt>
 <dd>Return the view attached to the controller</dd>
+<dt><a href="framework/logic/operator/greaterequalthan.html">GreaterEqualThan()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/operator/greaterthan.html">GreaterThan()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
 </dl>
 <h1 id="letterH">H</h1>
 <dl>
@@ -170,17 +241,44 @@
 </dl>
 <h1 id="letterI">I</h1>
 <dl>
+<dt><a href="framework/logic/operator/identical.html">Identical()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
 <dt><a href="framework/session/session.html#init()">init()</a> - Method in class <a href="framework/session/session.html">Framework\Session\Session</a></dt>
 <dd>Starts the session, create a session object as well as perform any other initilizing task.</dd>
+<dt><a href="framework/logic/type/integer.html">Integer()</a> - Class in namespace <a href="framework/logic/type/package-summary.html">Framework\Logic\Type</a></dt>
+<dd></dd>
 <dt><a href="framework/request.html#isAjax()">isAjax()</a> - Method in class <a href="framework/request.html">Framework\Request</a></dt>
 <dd>Determine if the request was an ajax based request, this is supported
  by all the major libaries, the correct header should be added if using
  xmlHttpRequest directly.</dd>
 </dl>
+<h1 id="letterL">L</h1>
+<dl>
+<dt><a href="framework/logic/operator/lessequalthan.html">LessEqualThan()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/operator/lessthan.html">LessThan()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+</dl>
 <h1 id="letterM">M</h1>
 <dl>
 <dt><a href="framework/accesscontrol.html#mirror()">mirror()</a> - Method in class <a href="framework/accesscontrol.html">Framework\AccessControl</a></dt>
 <dd>Makes one resource act as if it was the other</dd>
+</dl>
+<h1 id="letterN">N</h1>
+<dl>
+<dt><a href="framework/logic/operator/notequals.html">NotEquals()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/operator/notidentical.html">NotIdentical()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/operator/notoperator.html">NotOperator()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
+</dl>
+<h1 id="letterO">O</h1>
+<dl>
+<dt><a href="framework/logic/operatorinterface.html">OperatorInterface()</a> - Interface in namespace <a href="framework/logic/package-summary.html">Framework\Logic</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/operator/oroperator.html">OrOperator()</a> - Class in namespace <a href="framework/logic/operator/package-summary.html">Framework\Logic\Operator</a></dt>
+<dd></dd>
 </dl>
 <h1 id="letterP">P</h1>
 <dl>
@@ -227,7 +325,16 @@
 <dd>Sets the referrer</dd>
 <dt><a href="framework/strings.html#startsWith()">startsWith()</a> - Method in class <a href="framework/strings.html">Framework\Strings</a></dt>
 <dd>Check if the haystack string begins with the needle</dd>
+<dt><a href="framework/logic/statement.html">Statement()</a> - Class in namespace <a href="framework/logic/package-summary.html">Framework\Logic</a></dt>
+<dd></dd>
+<dt><a href="framework/logic/type/string.html">String()</a> - Class in namespace <a href="framework/logic/type/package-summary.html">Framework\Logic\Type</a></dt>
+<dd></dd>
 <dt><a href="framework/strings.html">Strings()</a> - Class in namespace <a href="framework/package-summary.html">Framework</a></dt>
+<dd></dd>
+</dl>
+<h1 id="letterT">T</h1>
+<dl>
+<dt><a href="framework/logic/typeinterface.html">TypeInterface()</a> - Interface in namespace <a href="framework/logic/package-summary.html">Framework\Logic</a></dt>
 <dd></dd>
 </dl>
 <h1 id="letterU">U</h1>
