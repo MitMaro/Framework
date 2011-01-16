@@ -40,25 +40,32 @@ class Request {
 			$this->setReferrer($url);
 		}
 		
-		$class_name = $callback['handler']['class'];
+		// if a controller object was passed in, use it directly
+		if (is_object($callback['handler']['class'])) {
+			$class = $callback['handler']['class'];
+			$view = $class->getView();
+		}
+		else {
+			$class_name = $callback['handler']['class'];
+			$view = new View();
+			$class = new $class_name($this, $view);
+		}
+		
 		$method_name = $callback['handler']['method'];
 		
 		// create the controller, and run
-		$action = new $class_name($this);
-		$action->_setup();
-		$action->_preInit();
-		$action->_init();
-		$action->_postInit();
-		// verify user access
-		if (!$action->_checkAccess()) {
-			return $action->_accessDenied();
-		}
-		$action->_preAction();
-		call_user_func_array(array($action, $method_name), $callback['params']);
-		$action->_postAction();
-		$action->_preRender();
-		$action->_render();
-		$action->_postRender();
+		$class->_preInit();
+		$class->_init();
+		$class->_postInit();
+		$class->_preAction();
+		call_user_func_array(array($class, $method_name), $callback['params']);
+		$class->_postAction();
+		$class->_preRender();
+		$class->getView()->render();
+		$class->_postRender();
+		$class->_preShutdown();
+		$class->_shutdown();
+		$class->_postShutdown();
 	}
 	
 	/**
@@ -76,11 +83,19 @@ class Request {
 				throw new Request\Exception('The pattern provided is invalid, must be a valid regular expression');
 			}
 			
-			$parts = explode('.', $handler);
+			if (is_array($handler)) {
+				$parts = $handler;
+			}
+			else if(is_string($handler)) {
+				$parts = explode('.', $handler);
+			}
+			else {
+				throw new Request\Exception('The handler provided is invalid.');
+			}
 			
 			// valid handler
 			if (count($parts) != 2) {
-				throw new Request\Exception('The handler provided is invalid, must be a valid php callback');
+				throw new Request\Exception('The handler provided is invalid.');
 			}
 			$this->url_maps[$pattern] = array('class' => $parts[0], 'method' => $parts[1]);
 		}
@@ -133,14 +148,6 @@ class Request {
 	public function setParams() {
 		$this->params = array_merge($this->params, $_GET);
 		$this->params = array_merge($this->params, $_POST);
-		
-		// merge in pushed over request params when supplied
-		if (class_exists('\Framework\Session')) {
-			if (($params = \Framework\Session::getOnce('_params', false, '___FRAMEWORK___')) != false) {
-				$this->params = array_merge($this->params, $params);
-			}
-		}
-		
 	}
 	
 	/**
@@ -202,7 +209,7 @@ class Request {
 		
 		// merge in pushed over request params when supplied
 		if (class_exists('\Framework\Session')) {
-			$referrer = Session::getOnce('referrer', false, '___FRAMEWORK___');
+			$referrer = Session::getOnce('referrer', false, '__FRAMEWORK__');
 			if ($referrer) {
 				return $referrer;
 			}
@@ -222,10 +229,7 @@ class Request {
 	 */
 	public function setReferrer($url) {
 		// save referreral
-		if (!class_exists('\Framework\Session')) {
-			throw new Request\Exception('The Session module is required to use ' . __METHOD__);
-		}
-		Session::setOnce('referrer', $url, self::$namespace);
+		Session::setOnce('referrer', $url, '__FRAMEWORK__');
 		
 	}
 	

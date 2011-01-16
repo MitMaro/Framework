@@ -7,7 +7,9 @@
  */
 
 use
-	\Framework\Request
+	\Framework\Request,
+	\Framework\Session,
+	\Framework\View
 ;
 
 class Request_Test extends PHPUnit_Framework_TestCase {
@@ -44,6 +46,24 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @covers \Framework\Request::addUrlPatterns
+	 * @covers \Framework\Request::getUrlPatternMap
+	 */
+	public function testAddUrlPatterns_validArray() {
+		$request = new Request();
+		$controller = new TestController($request, new \Framework\View());
+		
+		$request->addUrlPatterns(array('abc' => array($controller, 'testAction')));
+		
+		$this->assertEquals(
+			array(
+				'abc' => array('class' => $controller, 'method' => 'testAction'),
+			),
+			$request->getUrlPatternMap()
+		);
+	}
+	
+	/**
+	 * @covers \Framework\Request::addUrlPatterns
 	 * @expectedException \Framework\Request\Exception
 	 */
 	public function testAddUrlPatterns_invalidPattern() {
@@ -56,6 +76,15 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Framework\Request\Exception
 	 */
 	public function testAddUrlPatterns_invalidHandler() {
+		$request = new Request();
+		$request->addUrlPatterns(array('abc' => false));
+	}
+	
+	/**
+	 * @covers \Framework\Request::addUrlPatterns
+	 * @expectedException \Framework\Request\Exception
+	 */
+	public function testAddUrlPatterns_invalidHandlerString() {
 		$request = new Request();
 		$request->addUrlPatterns(array('abc' => 'abc'));
 	}
@@ -246,6 +275,24 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
+	 * @covers \Framework\Request::getReferrer
+	 * @covers \Framework\Request::setReferrer
+	 */
+	public function testSetReferrerGetReferrer_Session() {
+		Session::close();
+		Session::init();
+		$request = new Request();
+		$request->setReferrer('unittest referrer');
+		Session::close();
+		Session::init();
+		$this->assertEquals(
+			'unittest referrer',
+			$request->getReferrer()
+		);
+		
+	}
+	
+	/**
 	 * @covers \Framework\Request::isAjax
 	 */
 	public function testIsAjax_IsNot() {
@@ -262,4 +309,59 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(Request::isAjax());
 	}
 	
+	/**
+	 * @covers \Framework\Request::beginRequest
+	 */
+	public function testBeginRequest_FullMock() {
+		$request = new Request();
+		$view = $this->getMock('\Framework\View', array('render'));
+		$controller = $this->getMock(
+			'TestController',
+			array(
+				'_preInit',
+				'_init',
+				'_postInit',
+				'_preAction',
+				'testAction',
+				'_postAction',
+				'_preRender',
+				'_postRender',
+				'_preShutdown',
+				'_shutdown',
+				'_postShutdown'
+			),
+			array(&$request, &$view)
+		);
+		$controller->expects($this->once())->method('_preInit');
+		$controller->expects($this->once())->method('_init');
+		$controller->expects($this->once())->method('_postInit');
+		$controller->expects($this->once())->method('_preAction');
+		$controller->expects($this->once())->method('testAction');
+		$controller->expects($this->once())->method('_postAction');
+		$controller->expects($this->once())->method('_preRender');
+		$controller->expects($this->once())->method('_postRender');
+		$controller->expects($this->once())->method('_preShutdown');
+		$controller->expects($this->once())->method('_shutdown');
+		$controller->expects($this->once())->method('_postShutdown');
+		$view->expects($this->once())->method('render');
+			
+		$request->addUrlPatterns(array('/abc/' => array($controller, 'testAction')));
+		
+		$request->beginRequest('abc');
+	}
+	
+	/**
+	 * @covers \Framework\Request::beginRequest
+	 */
+	public function testBeginRequest_ConstructClass() {
+		$request = new Request();
+		$view = new View();
+		$request->addUrlPatterns(array('/abc/' => 'TestController.testAction'));
+		$request->beginRequest('abc');
+	}
+	
+}
+
+class TestController extends \Framework\Controller {
+	public function testAction(){}
 }

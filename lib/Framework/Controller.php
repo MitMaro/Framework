@@ -97,9 +97,9 @@ class Controller {
 	}
 	
 	/**
-	 * Return the request attached to the controller
+	 * Return the view attached to the controller
 	 *
-	 * @return \Framework\Request The request object.
+	 * @return \Framework\View The view object.
 	 */
 	public function getView() {
 		return $this->view;
