@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 16 Jan 2011 01:29:58 +0000">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>AccessControl (PHPDoctor)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../framework/package-summary.html">Namespace</a></li>
+<li class="active">Class</li>
+<li><a href="../framework/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../todo-list.html">Todo</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../framework/accesscontrol.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">Framework\AccessControl</div>
+<a href="../source/framework/accesscontrol.php.html#line12" class="location">Framework/AccessControl.php at line 12</a>
+
+<h1>Class AccessControl</h1>
+
+<pre class="tree"><strong>AccessControl</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>AccessControl</strong></p>
+
+<div class="comment" id="overview_description"><p></p></div>
+
+<dl>
+<dt>Version:</dt>
+<dd>0.1.0</dd>
+<dt>Author:</dt>
+<dd>Tim Oram (mitmaro@mitmaro.ca)</dd>
+<dt>Copyright:</dt>
+<dd>Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)</dd>
+<dt>License:</dt>
+<dd><a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a></dd>
+</dl>
+<hr>
+
+<table id="summary_field">
+<tr><th colspan="2">Field Summary</th></tr>
+<tr>
+<td class="type">protected static  boolean Default allow or deny</td>
+<td class="description"><p class="name"><a href="#default_access">$default_access</a></p><p class="description"></p></td>
+</tr>
+<tr>
+<td class="type">protected  array An array or resources</td>
+<td class="description"><p class="name"><a href="#resources">$resources</a></p><p class="description"></p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addResource()">addResource</a>(<a href="../framework/accesscontrol/resource.html">Resource</a> resource)</p><p class="description">Adds a resource</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addResourcePermissions()">addResourcePermissions</a>(<a href="../framework/accesscontrol/resource.html">Resource</a> resource, <a href="../framework/accesscontrol/permission.html">Permission</a> permissions)</p><p class="description">Adds permission(s) to a resource</p></td>
+</tr>
+<tr>
+<td class="type">static  bool</td>
+<td class="description"><p class="name"><a href="#getDefaultAccess()">getDefaultAccess</a>()</p><p class="description">Get default access</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#getResources()">getResources</a>()</p><p class="description">Get the array of resources</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#mirror()">mirror</a>(mixed resource_id, mixed mirror_resource_ids)</p><p class="description">Makes one resource act as if it was the other</p></td>
+</tr>
+<tr>
+<td class="type">static  void</td>
+<td class="description"><p class="name"><a href="#setDefaultAccess()">setDefaultAccess</a>(boolean grant)</p><p class="description">Set default access</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#verifyAccess()">verifyAccess</a>(<a href="../framework/accesscontrol/resource.html">Resource</a> resource, <a href="../framework/accesscontrol/user.html">User</a> user)</p><p class="description">Verify that a user has access to a resource</p></td>
+</tr>
+<tr>
+<td class="type">static  void</td>
+<td class="description"><p class="name"><a href="#verifyUserResourceAccess()">verifyUserResourceAccess</a>(<a href="../framework/accesscontrol/resource.html">Resource</a> user, <a href="../framework/accesscontrol/resource.html">Resource</a> resource)</p><p class="description">Check if the provided user can access the given resource</p></td>
+</tr>
+</table>
+
+<h2 id="detail_field">Field Detail</h2>
+<a href="../source/framework/accesscontrol.php.html#line22" class="location">Framework/AccessControl.php at line 22</a>
+
+<h3 id="default_access">default_access</h3>
+<code class="signature">protected static  boolean Default allow or deny <strong>$default_access</strong> = false</code>
+<div class="details">
+<p></p></div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line17" class="location">Framework/AccessControl.php at line 17</a>
+
+<h3 id="resources">resources</h3>
+<code class="signature">protected  array An array or resources <strong>$resources</strong> = array()</code>
+<div class="details">
+<p></p></div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/framework/accesscontrol.php.html#line42" class="location">Framework/AccessControl.php at line 42</a>
+
+<h3 id="addResource()">addResource</h3>
+<code class="signature">public  void <strong>addResource</strong>(<a href="../framework/accesscontrol/resource.html">Resource</a> resource)</code>
+<div class="details">
+<p>Adds a resource</p><dl>
+<dt>Parameters:</dt>
+<dd>resource - The resource object</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line30" class="location">Framework/AccessControl.php at line 30</a>
+
+<h3 id="addResourcePermissions()">addResourcePermissions</h3>
+<code class="signature">public  void <strong>addResourcePermissions</strong>(<a href="../framework/accesscontrol/resource.html">Resource</a> resource, <a href="../framework/accesscontrol/permission.html">Permission</a> permissions)</code>
+<div class="details">
+<p>Adds permission(s) to a resource</p><dl>
+<dt>Parameters:</dt>
+<dd>resource - The Resource object</dd>
+<dd>permissions - A Permission object or an array of Permission objects</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line110" class="location">Framework/AccessControl.php at line 110</a>
+
+<h3 id="getDefaultAccess()">getDefaultAccess</h3>
+<code class="signature">public static  bool <strong>getDefaultAccess</strong>()</code>
+<div class="details">
+<p>Get default access</p><dl>
+<dt>Returns:</dt>
+<dd>The current default access value</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line50" class="location">Framework/AccessControl.php at line 50</a>
+
+<h3 id="getResources()">getResources</h3>
+<code class="signature">public  array <strong>getResources</strong>()</code>
+<div class="details">
+<p>Get the array of resources</p><dl>
+<dt>Returns:</dt>
+<dd>An array of resource objects</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line73" class="location">Framework/AccessControl.php at line 73</a>
+
+<h3 id="mirror()">mirror</h3>
+<code class="signature">public  void <strong>mirror</strong>(mixed resource_id, mixed mirror_resource_ids)</code>
+<div class="details">
+<p>Makes one resource act as if it was the other</p><dl>
+<dt>Parameters:</dt>
+<dd>resource_id - The source resource id</dd>
+<dd>mirror_resource_ids - A resource id or an array of resource ids to make a mirror</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line101" class="location">Framework/AccessControl.php at line 101</a>
+
+<h3 id="setDefaultAccess()">setDefaultAccess</h3>
+<code class="signature">public static  void <strong>setDefaultAccess</strong>(boolean grant)</code>
+<div class="details">
+<p>Set default access</p><dl>
+<dt>Parameters:</dt>
+<dd>grant - Value of the default access (Optional, Default: true)</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line60" class="location">Framework/AccessControl.php at line 60</a>
+
+<h3 id="verifyAccess()">verifyAccess</h3>
+<code class="signature">public  boolean <strong>verifyAccess</strong>(<a href="../framework/accesscontrol/resource.html">Resource</a> resource, <a href="../framework/accesscontrol/user.html">User</a> user)</code>
+<div class="details">
+<p>Verify that a user has access to a resource</p><dl>
+<dt>Parameters:</dt>
+<dd>resource - The resource object</dd>
+<dd>user - The user object</dd>
+<dt>Returns:</dt>
+<dd>True is allowed access, false otherwise</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/framework/accesscontrol.php.html#line120" class="location">Framework/AccessControl.php at line 120</a>
+
+<h3 id="verifyUserResourceAccess()">verifyUserResourceAccess</h3>
+<code class="signature">public static  void <strong>verifyUserResourceAccess</strong>(<a href="../framework/accesscontrol/resource.html">Resource</a> user, <a href="../framework/accesscontrol/resource.html">Resource</a> resource)</code>
+<div class="details">
+<p>Check if the provided user can access the given resource</p><dl>
+<dt>Parameters:</dt>
+<dd>user - The user object</dd>
+<dd>user - The resource object</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../framework/package-summary.html">Namespace</a></li>
+<li class="active">Class</li>
+<li><a href="../framework/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../todo-list.html">Todo</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../framework/accesscontrol.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

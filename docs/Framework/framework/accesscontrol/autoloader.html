@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 16 Jan 2011 01:29:58 +0000">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>Autoloader (PHPDoctor)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li><a href="../../framework/accesscontrol/package-summary.html">Namespace</a></li>
+<li class="active">Class</li>
+<li><a href="../../framework/accesscontrol/package-tree.html">Tree</a></li>
+<li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../todo-list.html">Todo</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../framework/accesscontrol/autoloader.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">Framework\AccessControl\Autoloader</div>
+<a href="../../source/framework/autoloader.php.html#line71" class="location">Framework/Autoloader.php at line 71</a>
+
+<h1>Class Autoloader</h1>
+
+<pre class="tree"><strong>Autoloader</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>Autoloader</strong></p>
+
+<div class="comment" id="overview_description"><p>A simple yet powerful namespace based autoloader for php.</p><p>
+<h4>Basic Usage</h4>
+The most basic usage of the autoloader is to map a namespace to a directory like so:</p><p><pre>
+$autoloader = new \Framework\Autoloader();
+$autoloader->addNamespace('MyNameSpace', '/path/to/namespace/root/')
+</pre></p><p>This will autoload all classes that begin with the namespace MyNameSpace to that directory using
+the remainder of the namespace to figure out the path. That is, using the autloader setup from
+above, the class '\MyNameSpace\Admin\User' would map to '/path/to/namespace/root/Admin/User.php'.</p><p><h4>Mutltiple Directories Per Namespace</h4>
+It is possible to add mulitple directories to a namespace by calling the addNamespace method
+on the same name space more than once. For example:</p><p><pre>
+$autoloader = new \Framework\Autoloader();
+$autoloader->addNamespace('MyNameSpace', '/path/to/namespace/root/')
+$autoloader->addNamespace('MyNameSpace', '/second/path/to/namespace/root/')
+</pre></p><p>Using this setup the autoloader will first look into the first directory provided and if it is
+unable to find the file it will move on to the next directory.</p><p>
+<h4>Advanced Usage: Patterns</h4>
+Another way to use the autoloader is by using the simple pattern matching system. You provide
+tokens in the path when you register the namespace that will be replaced using values from the
+class namespace. Here is an example that explains the power of this system.</p><p>Assume you have a directory structure like this:</p><p><pre>
+| MyProject
+|    -> modules
+|       -> Admin
+|           -> controllers
+|                 -> Home.php           (class: \MyProject\Admin\Home)
+|                 -> AccessControl.php  (class: \MyProject\Admin\AccessControl)
+</pre></p><p>Lets assume you want to autoload the controllers in the modules folder. We know that the basic
+autoloader would not work because the controllers folder is not in the namespace, that is the
+namespace is not like '\MyProject\Admin\controllers\Home'. To overcome this problem you can write
+a pattern to auto add the controllers directory dynamically.</p><p><pre>
+$autoloader = new \Framework\Autoloader();
+$autoloader->addNamespace('MyProject', '/path/to/MyProject/modules/:1/controllers/')
+</pre></p><p>If you now tried to autoload the \MyProject\Admin\AccessControl is would now map to the directory
+'/path/to/MyProject/modules/Admin/controllers/AccessControl.php' instead of
+'/path/to/MyProject/modules/Admin/AccessControl.php'.</p></div>
+
+<dl>
+<dt>Version:</dt>
+<dd>0.1.0</dd>
+<dt>Author:</dt>
+<dd>Tim Oram (mitmaro@mitmaro.ca)</dd>
+<dt>Copyright:</dt>
+<dd>Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)</dd>
+<dt>License:</dt>
+<dd><a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a></dd>
+</dl>
+<hr>
+
+<table id="summary_field">
+<tr><th colspan="2">Field Summary</th></tr>
+<tr>
+<td class="type">protected  array</td>
+<td class="description"><p class="name"><a href="#namespaces">$namespaces</a></p><p class="description">An array of namespaces, directories key value pairs</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addNamespace()">addNamespace</a>(String namespace, String directory)</p><p class="description">Adds a namespace, directory key value pair</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#classLoader()">classLoader</a>(string class)</p><p class="description">Loads framework classes</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#clearNamespace()">clearNamespace</a>(String namespace)</p><p class="description">Clears all directories on a namespace</p></td>
+</tr>
+<tr>
+<td class="type">static  boolean</td>
+<td class="description"><p class="name"><a href="#fileExists()">fileExists</a>(string file)</p><p class="description">Check if a file can be found on the include path</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#getNamespaceMap()">getNamespaceMap</a>()</p><p class="description">Returns the namespace map array</p></td>
+</tr>
+</table>
+
+<h2 id="detail_field">Field Detail</h2>
+<a href="../../source/framework/autoloader.php.html#line77" class="location">Framework/Autoloader.php at line 77</a>
+
+<h3 id="namespaces">namespaces</h3>
+<code class="signature">protected  array <strong>$namespaces</strong> = array()</code>
+<div class="details">
+<p>An array of namespaces, directories key value pairs</p></div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../../source/framework/autoloader.php.html#line127" class="location">Framework/Autoloader.php at line 127</a>
+
+<h3 id="addNamespace()">addNamespace</h3>
+<code class="signature">public  void <strong>addNamespace</strong>(String namespace, String directory)</code>
+<div class="details">
+<p>Adds a namespace, directory key value pair</p><dl>
+<dt>Parameters:</dt>
+<dd>namespace - The namespace to handle</dd>
+<dd>directory - The directory to add</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../../source/framework/autoloader.php.html#line84" class="location">Framework/Autoloader.php at line 84</a>
+
+<h3 id="classLoader()">classLoader</h3>
+<code class="signature">public  void <strong>classLoader</strong>(string class)</code>
+<div class="details">
+<p>Loads framework classes</p><dl>
+<dt>Parameters:</dt>
+<dd>class - The class name</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../../source/framework/autoloader.php.html#line139" class="location">Framework/Autoloader.php at line 139</a>
+
+<h3 id="clearNamespace()">clearNamespace</h3>
+<code class="signature">public  void <strong>clearNamespace</strong>(String namespace)</code>
+<div class="details">
+<p>Clears all directories on a namespace</p><dl>
+<dt>Parameters:</dt>
+<dd>namespace - The namespace to handle</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../../source/framework/autoloader.php.html#line160" class="location">Framework/Autoloader.php at line 160</a>
+
+<h3 id="fileExists()">fileExists</h3>
+<code class="signature">public static  boolean <strong>fileExists</strong>(string file)</code>
+<div class="details">
+<p>Check if a file can be found on the include path</p><dl>
+<dt>Parameters:</dt>
+<dd>file - A file with an optional path</dd>
+<dt>Returns:</dt>
+<dd>True is file found, otherwise false</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../../source/framework/autoloader.php.html#line148" class="location">Framework/Autoloader.php at line 148</a>
+
+<h3 id="getNamespaceMap()">getNamespaceMap</h3>
+<code class="signature">public  array <strong>getNamespaceMap</strong>()</code>
+<div class="details">
+<p>Returns the namespace map array</p><dl>
+<dt>Returns:</dt>
+<dd>The namespace map array</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li><a href="../../framework/accesscontrol/package-summary.html">Namespace</a></li>
+<li class="active">Class</li>
+<li><a href="../../framework/accesscontrol/package-tree.html">Tree</a></li>
+<li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../todo-list.html">Todo</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../framework/accesscontrol/autoloader.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>
