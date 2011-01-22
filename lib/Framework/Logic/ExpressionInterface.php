@@ -9,10 +9,6 @@
 
 namespace Framework\Logic;
 
-use
-	Framework\Logic\ExpressionInterface
-;
-
 interface ExpressionInterface {
 	/**
 	 * Evaluate the expression
