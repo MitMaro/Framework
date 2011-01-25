@@ -15,6 +15,7 @@ Not sure how accurate this is, this is the first time I ever wrote a formal synt
     statement            = "(", { white space }, statement, { white space }, ")" ;
     expression           = type, white space, value ;
     expression           = type, white space, variable ;
+    operator             = "&&" | "==" | ">=" | ">" | "===" | "<=" | "<" | "!=" | "!==" | "!" | "||"
     type                 = "Boolean" | "Float" | "Integer" | "String" ;
     variable             = "$", alpha numeric , { alpha numeric } ;
     value                = string | (alpha numeric, { alpha numeric })
