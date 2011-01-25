@@ -7,7 +7,6 @@
  */
 
 use
-	\Framework\Logic\Type\Boolean,
 	\Framework\Logic\Operator\OrOperator
 ;
 
@@ -18,10 +17,10 @@ class LogicOpeartorOr_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testAll() {
 		$operator = new OrOperator();
-		$this->assertTrue($operator->execute(new Boolean(true), new Boolean(true)));
-		$this->assertTrue($operator->execute(new Boolean(true), new Boolean(false)));
-		$this->assertTrue($operator->execute(new Boolean(false), new Boolean(true)));
-		$this->assertFalse($operator->execute(new Boolean(false), new Boolean(false)));
+		$this->assertTrue($operator->execute(true, true));
+		$this->assertTrue($operator->execute(true, false));
+		$this->assertTrue($operator->execute(false, true));
+		$this->assertFalse($operator->execute(false, false));
 	}
 	
 }

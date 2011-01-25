@@ -7,19 +7,15 @@
  */
 
 use
-	\Framework\Logic\Operator\NotOperator
+	\Framework\Logic\Exception\InvalidValue
 ;
 
-class LogicOpeartorNot_Test extends PHPUnit_Framework_TestCase {
+class LogicExceptionInvalidValue_Test extends PHPUnit_Framework_TestCase {
 	
 	/**
-	 * @covers \Framework\Logic\Operator\NotOperator::execute
+	 * @covers \Framework\Logic\Exception\InvalidValue
 	 */
 	public function testAll() {
-		$operator = new NotOperator();
-		$this->assertFalse($operator->execute(true, null));
-		$this->assertTrue($operator->execute(false, null));
+		new InvalidValue();
 	}
-	
 }
-

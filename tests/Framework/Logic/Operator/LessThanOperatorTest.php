@@ -7,8 +7,6 @@
  */
 
 use
-	\Framework\Logic\Type\String,
-	\Framework\Logic\Type\Integer,
 	\Framework\Logic\Operator\LessThan
 ;
 
@@ -19,9 +17,9 @@ class LogicOpeartorLessThan_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testAll() {
 		$operator = new LessThan();
-		$this->assertFalse($operator->execute(new Integer(1), new Integer(1)));
-		$this->assertFalse($operator->execute(new Integer(2), new Integer(1)));
-		$this->assertTrue($operator->execute(new Integer(1), new Integer(2)));
+		$this->assertFalse($operator->execute(1, 1));
+		$this->assertFalse($operator->execute(2, 1));
+		$this->assertTrue($operator->execute(1, 2));
 	}
 	
 }

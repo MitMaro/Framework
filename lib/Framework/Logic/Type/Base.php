@@ -28,7 +28,7 @@ abstract class Base implements \Framework\Logic\TypeInterface, \Framework\Logic\
 	/**
 	 * The evaluation of a type is it's value
 	 */
-	public function evaluate() {
+	public function evaluate($data_provider = null) {
 		return $this->getValue();
 	}
 	

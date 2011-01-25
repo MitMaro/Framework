@@ -25,7 +25,7 @@ class NotOperator implements OperatorInterface {
 	 * 
 	 * @return boolean The value of the operation
 	 */
-	public function execute(ExpressionInterface $left, ExpressionInterface $right = null) {
-		return !$left->evaluate();
+	public function execute($left, $right = null) {
+		return !$left;
 	}
 }

@@ -9,11 +9,6 @@
 
 namespace Framework\Logic;
 
-use
-	Framework\Logic\ExpressionInterface,
-	Framework\Logic\OperatorInterface
-;
-
 interface OperatorInterface {
 	
 	/**
@@ -25,6 +20,6 @@ interface OperatorInterface {
 	 * 
 	 * @return boolean The value of the operation
 	 */
-	public function execute(ExpressionInterface $left, ExpressionInterface $right = null);
+	public function execute($left, $right = null);
 	
 }

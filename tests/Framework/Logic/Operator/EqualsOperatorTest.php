@@ -7,8 +7,6 @@
  */
 
 use
-	\Framework\Logic\Type\String,
-	\Framework\Logic\Type\Integer,
 	\Framework\Logic\Operator\Equals
 ;
 
@@ -19,9 +17,9 @@ class LogicOpeartorEquals_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testAll() {
 		$operator = new Equals();
-		$this->assertTrue($operator->execute(new String('1'), new Integer(1)));
-		$this->assertTrue($operator->execute(new String('1'), new String('1')));
-		$this->assertTrue($operator->execute(new String('123abc'), new Integer(123)));
+		$this->assertTrue($operator->execute('1', 1));
+		$this->assertTrue($operator->execute('1', '1'));
+		$this->assertTrue($operator->execute('123abc', 123));
 	}
 	
 }

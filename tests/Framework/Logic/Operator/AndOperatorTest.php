@@ -7,7 +7,6 @@
  */
 
 use
-	\Framework\Logic\Type\Boolean,
 	\Framework\Logic\Operator\AndOperator
 ;
 
@@ -18,10 +17,11 @@ class LogicOpeartorAnd_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testAll() {
 		$operator = new AndOperator();
-		$this->assertTrue($operator->execute(new Boolean(true), new Boolean(true)));
-		$this->assertFalse($operator->execute(new Boolean(true), new Boolean(false)));
-		$this->assertFalse($operator->execute(new Boolean(false), new Boolean(true)));
-		$this->assertFalse($operator->execute(new Boolean(false), new Boolean(false)));
+		
+		$this->assertTrue($operator->execute(true, true));
+		$this->assertFalse($operator->execute(true, false));
+		$this->assertFalse($operator->execute(false, true));
+		$this->assertFalse($operator->execute(false, false));
 	}
 	
 }

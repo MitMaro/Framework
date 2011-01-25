@@ -23,7 +23,7 @@ class OrOperator implements OperatorInterface {
 	 * @param ExpressionInterface $right The right hand of the operation
 	 * 
 	 * @return boolean The value of the operation
-	 */	public function execute(ExpressionInterface $left, ExpressionInterface $right = null) {
-		return $left->evaluate() || $right->evaluate();
+	 */	public function execute($left, $right = null) {
+		return $left || $right;
 	}
 }

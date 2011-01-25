@@ -8,6 +8,8 @@
 
 use
 	\Framework\Logic\Statement,
+	\Framework\Logic\Variable,
+	\Framework\Logic\DataProvider\Hashmap,
 	\Framework\Logic\Operator\AndOperator,
 	\Framework\Logic\Operator\NotOperator,
 	\Framework\Logic\Type\Boolean
@@ -96,6 +98,31 @@ class LogicStatement_Test extends PHPUnit_Framework_TestCase {
 		
 		$statement = new Statement($operator, $trueStatement, $notStatement);
 		$this->assertTrue($statement->evaluate());
+		
+	}
+	
+	/**
+	 * @covers \Framework\Logic\Statement::evaluate
+	 */
+	public function test_VariablesStatement() {
+		$statement = new Statement(
+			new AndOperator(),
+			new Variable('\Framework\Logic\Type\Boolean', 'abc'),
+			new Variable('\Framework\Logic\Type\Boolean', 'def')
+		);
+		
+		$data = new Hashmap();
+		$data->addVariable('abc', true);
+		$data->addVariable('def', true);
+		$this->assertTrue($statement->evaluate($data));
+		
+		$data->addVariable('abc', true);
+		$data->addVariable('def', false);
+		$this->assertFalse($statement->evaluate($data));
+		
+		$data->addVariable('abc', false);
+		$data->addVariable('def', false);
+		$this->assertFalse($statement->evaluate($data));
 		
 	}
 	
