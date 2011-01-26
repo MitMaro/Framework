@@ -10,11 +10,12 @@
 namespace Framework\Logic;
 
 use
+	Framework\Logic\ScannerInterface,
 	Framework\Logic\ExpressionInterface,
 	Framework\Logic\OperatorInterface
 ;
 
-class Scanner {
+class Scanner implements ScannerInterface {
 	
 	/**
 	 * Types mapping
@@ -27,6 +28,12 @@ class Scanner {
 	 * @var array
 	 */
 	protected $operators = array();
+	
+	/**
+	 * Operator mappings
+	 * @var array
+	 */
+	protected $variable_classes = array();
 	
 	/**
 	 * Statement delimiters mapping
@@ -82,23 +89,16 @@ class Scanner {
 	protected $str_length = 0;
 	
 	/**
-	 * The tokens after parsing is complete
-	 *
-	 * @var array
-	 */
-	protected $tokens = array();
-	
-	/**
 	 * @param string $string The data string to parse
 	 */
 	public function __construct($string) {
 		// some default maps, done here because __NAMESPACE__ can not be used above
 		
 		// types
-		$this->types['integer'] = __NAMESPACE__ . '\Type\Integer';
-		$this->types['float'] = __NAMESPACE__ . '\Type\Float';
-		$this->types['string'] = __NAMESPACE__ . '\Type\String';
-		$this->types['boolean'] = __NAMESPACE__ . '\Type\Boolean';
+		$this->types['Integer'] = __NAMESPACE__ . '\Type\Integer';
+		$this->types['Float'] = __NAMESPACE__ . '\Type\Float';
+		$this->types['String'] = __NAMESPACE__ . '\Type\String';
+		$this->types['Boolean'] = __NAMESPACE__ . '\Type\Boolean';
 		
 		// opeartors
 		$this->operators['||'] = __NAMESPACE__ . '\Operator\OrOperator';
@@ -112,6 +112,9 @@ class Scanner {
 		$this->operators['!='] = __NAMESPACE__ . '\Operator\NotEquals';
 		$this->operators['==='] = __NAMESPACE__ . '\Operator\Identical';
 		$this->operators['!=='] = __NAMESPACE__ . '\Operator\NotIdentical';
+		
+		// variables
+		$this->variable_class = __NAMESPACE__ . '\Variable';
 		
 		// delimiters
 		$this->statement_delimiters['('] = __NAMESPACE__ . '\Delimiter';
@@ -326,38 +329,45 @@ class Scanner {
 	}
 	
 	/**
-	 * Tokenize the string, changing each string token into a class
+	 * Gets the next token from the input
 	 *
-	 * @return array
+	 * @return mixed A token
 	 */
-	public function tokenizeString() {
-		while (($token = $this->readNextToken()) !== false) {
-			
-			// we have a type
-			if (isset($this->types[$token])) {
-				$type = $this->types[$token];
-				$value = $this->readNextToken();
-				if ($value === false) {
-					throw new Exception\InvalidValue("A type was found but no value followed");
-				}
-				$this->tokens[] = new $type($value);
-				continue;
-			}
-			
-			// handle delimiters
-			if (isset($this->statement_delimiters[$token])) {
-				$this->tokens[] = new $this->statement_delimiters[$token]($token);
-				continue;
-			}
-			
-			// handle operators
-			if (isset($this->operators[$token])) {
-				$this->tokens[] = new $this->operators[$token]($token);
-				continue;
-			}
-			throw new Exception\InvalidValue("Unknwon type provided: $token");
+	public function getNextToken() {
+		$token = $this->readNextToken();
+		
+		// end of stream
+		if ($token === false) {
+			return false;
 		}
-		return $this->tokens;
+		
+		// we have a type
+		if (isset($this->types[$token])) {
+			$type = $this->types[$token];
+			$value = $this->readNextToken();
+			if ($value === false) {
+				throw new Exception\InvalidValue("A type was found but no value followed");
+			}
+			// if a variable
+			if ($value[0] == '$') {
+				// create variable 
+				return new $this->variable_class($type, substr($value, 1));
+			} else {
+				return new $type($value);
+			}
+		}
+		
+		// handle delimiters
+		if (isset($this->statement_delimiters[$token])) {
+			return new $this->statement_delimiters[$token]($token);
+		}
+		
+		// handle operators
+		if (isset($this->operators[$token])) {
+			return new $this->operators[$token]($token);
+		}
+		
+		throw new Exception\InvalidValue("Unknwon token: $token");
 	}
 	
 }

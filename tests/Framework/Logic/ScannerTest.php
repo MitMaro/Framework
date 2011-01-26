@@ -9,6 +9,7 @@
 use
 	\Framework\Logic\Scanner,
 	\Framework\Logic\Type,
+	\Framework\Logic\Variable,
 	\Framework\Logic\Operator,
 	\Framework\Logic\OperatorInterface,
 	\Framework\Logic\ExpressionInterface,
@@ -77,6 +78,11 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 			array('abc', array('abc')),
 			array('a b', array('a', 'b')),
 			array('abc def', array('abc', 'def')),
+			array('$a', array('$a')),
+			array('$abc', array('$abc')),
+			array('$a b', array('$a', 'b')),
+			array('a $b', array('a', '$b')),
+			array('abc $def', array('abc', '$def')),
 			array('"d e f"', array('d e f')),
 			array('abc "d e f"', array('abc', 'd e f')),
 			array('abc ""', array('abc', '')),
@@ -125,28 +131,31 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::tokenizeString
-	 * @dataProvider tokenizeStringData
+	 * @covers \Framework\Logic\Scanner::getNextToken
+	 * @dataProvider getNextTokenData
 	 */
 	public function test_tokenizeString_simple($string, $results) {
 		$scanner = new Scanner($string);
 		
-		$this->assertEquals($results, $scanner->tokenizeString());
+		foreach ($results as $result) {
+			$this->assertEquals($result, $scanner->getNextToken());
+		}
 	}
 	
-	public function tokenizeStringData() {
+	public function getNextTokenData() {
 		return array(
-			array('integer 1',
-				array(new Type\Integer(1)),
+			array('Integer 1',
+				array(new Type\Integer(1), false),
 			),
-			array('integer 1 > integer 2',
+			array('Integer 1 > Integer 2',
 				array(
 					new Type\Integer(1),
 					new Operator\GreaterThan(),
 					new Type\Integer(2),
+					false,
 				),
 			),
-			array('(integer 1 > integer 2) && (string abc == string cde)',
+			array('(Integer 1 > Integer 2) && (String abc == String cde)',
 				array(
 					new Delimiter('('),
 					new Type\Integer(1),
@@ -159,24 +168,67 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 					new Operator\Equals(),
 					new Type\String('cde'),
 					new Delimiter(')'),
+					false,
 				),
 			),
 		);
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::tokenizeString
+	 * @covers \Framework\Logic\Scanner::getNextToken
+	 * @dataProvider getNextTokenVariableData
+	 */
+	public function test_tokenizeString_variables($string, $results) {
+		$scanner = new Scanner($string);
+		
+		foreach ($results as $result) {
+			$this->assertEquals($result, $scanner->getNextToken());
+		}
+	}
+	
+	public function getNextTokenVariableData() {
+		return array(
+			array('Integer $abc',
+				array(new Variable('Framework\Logic\Type\Integer', 'abc')),
+			),
+			array('Integer $abc > Integer $def',
+				array(
+					new Variable('Framework\Logic\Type\Integer', 'abc'),
+					new Operator\GreaterThan(),
+					new Variable('Framework\Logic\Type\Integer', 'def'),
+				),
+			),
+			array('(Integer $a > Integer $b) && (String $c == String $d)',
+				array(
+					new Delimiter('('),
+					new Variable('Framework\Logic\Type\Integer', 'a'),
+					new Operator\GreaterThan(),
+					new Variable('Framework\Logic\Type\Integer', 'b'),
+					new Delimiter(')'),
+					new Operator\AndOperator(),
+					new Delimiter('('),
+					new Variable('Framework\Logic\Type\String', 'c'),
+					new Operator\Equals(),
+					new Variable('Framework\Logic\Type\String', 'd'),
+					new Delimiter(')'),
+				),
+			),
+		);
+	}
+	
+	/**
+	 * @covers \Framework\Logic\Scanner::getNextToken
 	 * @expectedException \Framework\Logic\Exception\InvalidValue
-	 * @dataProvider tokenizeStringInvalidData
+	 * @dataProvider getNextTokenInvalidData
 	 */
 	public function test_tokenizeString_invalid($string) {
 		$scanner = new Scanner($string);
-		$scanner->tokenizeString();
+		$scanner->getNextToken();
 	}
 	
-	public function tokenizeStringInvalidData() {
+	public function getNextTokenInvalidData() {
 		return array(
-			array('integer'), // not value
+			array('Integer'), // not value
 			array('abc 1'), // invalid type
 		);
 	}
