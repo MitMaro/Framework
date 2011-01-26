@@ -9,7 +9,7 @@
 
 namespace Framework\Logic;
 
-interface ScannerInterface {
+interface LexerInterface {
 	
 	/**
 	 * Gets the next token from the input

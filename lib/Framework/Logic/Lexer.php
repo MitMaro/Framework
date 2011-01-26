@@ -15,7 +15,7 @@ use
 	Framework\Logic\OperatorInterface
 ;
 
-class Scanner implements ScannerInterface {
+class Lexer implements LexerInterface {
 	
 	/**
 	 * Types mapping

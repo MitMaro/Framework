@@ -7,7 +7,7 @@
  */
 
 use
-	\Framework\Logic\Scanner,
+	\Framework\Logic\Lexer,
 	\Framework\Logic\Type,
 	\Framework\Logic\Variable,
 	\Framework\Logic\Operator,
@@ -16,20 +16,20 @@ use
 	\Framework\Logic\Delimiter
 ;
 
-class LogicScanner_Test extends PHPUnit_Framework_TestCase {
+class LogicLexer_Test extends PHPUnit_Framework_TestCase {
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::__construct
+	 * @covers \Framework\Logic\Lexer::__construct
 	 */
 	public function test_construct() {
-		new Scanner('abc');
+		new Lexer('abc');
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::combineAndSortDelimiters
+	 * @covers \Framework\Logic\Lexer::combineAndSortDelimiters
 	 */
 	public function test_combineAndSortDelimiters() {
-		$scanner = new Scanner('');
+		$lexer = new Lexer('');
 		$this->assertEquals(
 			array (
 				1 => array (
@@ -42,31 +42,31 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 					'===', '!==',
 				)
 			),
-			$scanner->combineAndSortDelimiters()
+			$lexer->combineAndSortDelimiters()
 		);
 		// hit again to hit cache
-		$scanner->combineAndSortDelimiters();
+		$lexer->combineAndSortDelimiters();
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::skipWhitespace
+	 * @covers \Framework\Logic\Lexer::skipWhitespace
 	 */
 	public function test_skipWhitespace() {
-		$scanner = new Scanner('    abc');
-		$this->assertEquals(4, $scanner->skipWhitespace());
+		$lexer = new Lexer('    abc');
+		$this->assertEquals(4, $lexer->skipWhitespace());
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::readNextToken
+	 * @covers \Framework\Logic\Lexer::readNextToken
 	 * @dataProvider readNextTokenData
 	 */
 	public function test_readNextToken_simple($string, $results) {
-		$scanner = new Scanner($string);
+		$lexer = new Lexer($string);
 		
 		foreach ($results as $r) {
 			$this->assertEquals(
 				$r,
-				$scanner->readNextToken()
+				$lexer->readNextToken()
 			);
 		}
 	}
@@ -115,13 +115,13 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::readNextToken
+	 * @covers \Framework\Logic\Lexer::readNextToken
 	 * @expectedException \Framework\Logic\Exception\InvalidValue
 	 * @dataProvider readNextTokenInvalidData
 	 */
 	public function test_readNextToken_invalid($string) {
-		$scanner = new Scanner($string);
-		$scanner->readNextToken();
+		$lexer = new Lexer($string);
+		$lexer->readNextToken();
 	}
 	
 	public function readNextTokenInvalidData() {
@@ -131,14 +131,14 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::getNextToken
+	 * @covers \Framework\Logic\Lexer::getNextToken
 	 * @dataProvider getNextTokenData
 	 */
 	public function test_tokenizeString_simple($string, $results) {
-		$scanner = new Scanner($string);
+		$lexer = new Lexer($string);
 		
 		foreach ($results as $result) {
-			$this->assertEquals($result, $scanner->getNextToken());
+			$this->assertEquals($result, $lexer->getNextToken());
 		}
 	}
 	
@@ -175,14 +175,14 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::getNextToken
+	 * @covers \Framework\Logic\Lexer::getNextToken
 	 * @dataProvider getNextTokenVariableData
 	 */
 	public function test_tokenizeString_variables($string, $results) {
-		$scanner = new Scanner($string);
+		$lexer = new Lexer($string);
 		
 		foreach ($results as $result) {
-			$this->assertEquals($result, $scanner->getNextToken());
+			$this->assertEquals($result, $lexer->getNextToken());
 		}
 	}
 	
@@ -217,13 +217,13 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::getNextToken
+	 * @covers \Framework\Logic\Lexer::getNextToken
 	 * @expectedException \Framework\Logic\Exception\InvalidValue
 	 * @dataProvider getNextTokenInvalidData
 	 */
 	public function test_tokenizeString_invalid($string) {
-		$scanner = new Scanner($string);
-		$scanner->getNextToken();
+		$lexer = new Lexer($string);
+		$lexer->getNextToken();
 	}
 	
 	public function getNextTokenInvalidData() {
@@ -234,15 +234,15 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::addType
-	 * @covers \Framework\Logic\Scanner::getTypes
+	 * @covers \Framework\Logic\Lexer::addType
+	 * @covers \Framework\Logic\Lexer::getTypes
 	 */
 	public function test_addType() {
-		$scanner = new Scanner('');
+		$lexer = new Lexer('');
 		
-		$scanner->addType('^', 'a_class_name');
+		$lexer->addType('^', 'a_class_name');
 		
-		$types = $scanner->getTypes();
+		$types = $lexer->getTypes();
 		
 		$this->assertTrue(isset($types['^']));
 		$this->assertEquals('a_class_name', $types['^']);
@@ -250,31 +250,31 @@ class LogicScanner_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::addStatementDelimiter
-	 * @covers \Framework\Logic\Scanner::getStatementDelimiter
+	 * @covers \Framework\Logic\Lexer::addStatementDelimiter
+	 * @covers \Framework\Logic\Lexer::getStatementDelimiter
 	 */
 	public function test_addStatementDelimiter() {
-		$scanner = new Scanner('');
+		$lexer = new Lexer('');
 		
-		$scanner->addStatementDelimiter('^');
-		$scanner->addStatementDelimiter('^'); // add twice to test the no double insert
+		$lexer->addStatementDelimiter('^');
+		$lexer->addStatementDelimiter('^'); // add twice to test the no double insert
 		
-		$delimiters = $scanner->getStatementDelimiter();
+		$delimiters = $lexer->getStatementDelimiter();
 		
 		$this->assertEquals(1, count(array_keys($delimiters, '^')));
 		
 	}
 	
 	/**
-	 * @covers \Framework\Logic\Scanner::addOperator
-	 * @covers \Framework\Logic\Scanner::getOperators
+	 * @covers \Framework\Logic\Lexer::addOperator
+	 * @covers \Framework\Logic\Lexer::getOperators
 	 */
 	public function test_addOperator() {
-		$scanner = new Scanner('');
+		$lexer = new Lexer('');
 		
-		$scanner->addOperator('{', 'a_delimiter_class');
+		$lexer->addOperator('{', 'a_delimiter_class');
 		
-		$delimiter = $scanner->getOperators();
+		$delimiter = $lexer->getOperators();
 		
 		$this->assertTrue(isset($delimiter['{']));
 		$this->assertEquals('a_delimiter_class', $delimiter['{']);
