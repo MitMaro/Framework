@@ -14,12 +14,13 @@ Not sure how accurate this is, this is the first time I ever wrote a formal synt
     statement            = expression, { white space }, operator, { white space }, expression ;
     statement            = "(", { white space }, statement, { white space }, ")" ;
     expression           = type, white space, value ;
+    expression           = type, white space, quoted value ;
     expression           = type, white space, variable ;
     operator             = "&&" | "==" | ">=" | ">" | "===" | "<=" | "<" | "!=" | "!==" | "!" | "||"
     type                 = "Boolean" | "Float" | "Integer" | "String" ;
     variable             = "$", alpha numeric , { alpha numeric } ;
-    value                = string | (alpha numeric, { alpha numeric })
-    string               = '"' , { all characters - '"', "\"" } , '"' ;
+    value                = alpha numeric, { alpha numeric }
+    quoted value         = '"' , { all characters - '"', "\"" } , '"' ;
     alphabetic character = "A" | "B" | "C" | "D" | "E" | "F" | "G"
                            | "H" | "I" | "J" | "K" | "L" | "M" | "N"
                            | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
