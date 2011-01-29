@@ -9,7 +9,7 @@
 
 namespace Framework\Logic\Type;
 
-abstract class Base implements \Framework\Logic\TypeInterface, \Framework\Logic\ExpressionInterface {
+abstract class Base implements \Framework\Logic\TypeInterface {
 	
 	/**
 	 * The interal value of this type

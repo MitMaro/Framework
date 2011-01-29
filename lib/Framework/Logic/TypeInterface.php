@@ -9,7 +9,7 @@
 
 namespace Framework\Logic;
 
-interface TypeInterface {
+interface TypeInterface  extends ExpressionInterface {
 	/**
 	 * Gets the php value
 	 */
