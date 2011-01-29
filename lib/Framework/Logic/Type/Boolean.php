@@ -17,6 +17,12 @@ class Boolean extends Base {
 	 * @param mixed Any value that can be converted into a boolean
 	 */
 	public function __construct($value) {
-		$this->value = (boolean)$value;
+		if (is_string($value) && $value === 'true') {
+			$this->value = true;
+		} else if (is_string($value) && $value === 'false') {
+			$this->value = false;
+		} else {
+			$this->value = (boolean)$value;
+		}
 	}
 }

@@ -22,10 +22,16 @@ class LogicTypeBoolean_Test extends PHPUnit_Framework_TestCase {
 		$type = new Boolean(1);
 		$this->assertTrue($type->getValue());
 		
+		$type = new Boolean('true');
+		$this->assertTrue($type->getValue());
+		
 		$type = new Boolean(false);
 		$this->assertFalse($type->getValue());
 		
 		$type = new Boolean(0);
+		$this->assertFalse($type->getValue());
+		
+		$type = new Boolean('false');
 		$this->assertFalse($type->getValue());
 	}
 }
