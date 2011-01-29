@@ -10,11 +10,11 @@
 namespace Framework\Logic\Operator;
 
 use
-	Framework\Logic\OperatorInterface,
+	Framework\Logic\UnaryOperatorInterface,
 	Framework\Logic\ExpressionInterface
 ;
 
-class NotOperator implements OperatorInterface {
+class NotOperator implements UnaryOperatorInterface {
 
 	/**
 	 * Execute the operator on the expressions
