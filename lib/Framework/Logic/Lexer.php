@@ -9,12 +9,6 @@
 
 namespace Framework\Logic;
 
-use
-	Framework\Logic\ScannerInterface,
-	Framework\Logic\ExpressionInterface,
-	Framework\Logic\OperatorInterface
-;
-
 class Lexer implements LexerInterface {
 	
 	/**
@@ -117,10 +111,10 @@ class Lexer implements LexerInterface {
 		$this->variable_class = __NAMESPACE__ . '\Variable';
 		
 		// delimiters
-		$this->statement_delimiters['('] = __NAMESPACE__ . '\Delimiter';
-		$this->statement_delimiters[')'] = __NAMESPACE__ . '\Delimiter';
-		$this->statement_delimiters['['] = __NAMESPACE__ . '\Delimiter';
-		$this->statement_delimiters[']'] = __NAMESPACE__ . '\Delimiter';
+		$this->statement_delimiters['('] = __NAMESPACE__ . '\LeftDelimiter';
+		$this->statement_delimiters[')'] = __NAMESPACE__ . '\RightDelimiter';
+		$this->statement_delimiters['['] = __NAMESPACE__ . '\LeftDelimiter';
+		$this->statement_delimiters[']'] = __NAMESPACE__ . '\RightDelimiter';
 		
 		$this->str = $string;
 		$this->str_length = strlen($string);

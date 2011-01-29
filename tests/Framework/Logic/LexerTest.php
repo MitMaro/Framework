@@ -13,7 +13,8 @@ use
 	\Framework\Logic\Operator,
 	\Framework\Logic\OperatorInterface,
 	\Framework\Logic\ExpressionInterface,
-	\Framework\Logic\Delimiter
+	\Framework\Logic\LeftDelimiter,
+	\Framework\Logic\RightDelimiter
 ;
 
 class LogicLexer_Test extends PHPUnit_Framework_TestCase {
@@ -157,17 +158,17 @@ class LogicLexer_Test extends PHPUnit_Framework_TestCase {
 			),
 			array('(Integer 1 > Integer 2) && (String abc == String cde)',
 				array(
-					new Delimiter('('),
+					new LeftDelimiter('('),
 					new Type\Integer(1),
 					new Operator\GreaterThan(),
 					new Type\Integer(2),
-					new Delimiter(')'),
+					new RightDelimiter(')'),
 					new Operator\AndOperator(),
-					new Delimiter('('),
+					new LeftDelimiter('('),
 					new Type\String('abc'),
 					new Operator\Equals(),
 					new Type\String('cde'),
-					new Delimiter(')'),
+					new RightDelimiter(')'),
 					false,
 				),
 			),
@@ -200,17 +201,17 @@ class LogicLexer_Test extends PHPUnit_Framework_TestCase {
 			),
 			array('(Integer $a > Integer $b) && (String $c == String $d)',
 				array(
-					new Delimiter('('),
+					new LeftDelimiter('('),
 					new Variable('Framework\Logic\Type\Integer', 'a'),
 					new Operator\GreaterThan(),
 					new Variable('Framework\Logic\Type\Integer', 'b'),
-					new Delimiter(')'),
+					new RightDelimiter(')'),
 					new Operator\AndOperator(),
-					new Delimiter('('),
+					new LeftDelimiter('('),
 					new Variable('Framework\Logic\Type\String', 'c'),
 					new Operator\Equals(),
 					new Variable('Framework\Logic\Type\String', 'd'),
-					new Delimiter(')'),
+					new RightDelimiter(')'),
 				),
 			),
 		);
