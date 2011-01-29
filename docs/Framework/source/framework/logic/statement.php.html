@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+<meta name="when" content="Sat, 29 Jan 2011 05:19:12 +0000">
 
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
 <link rel="start" href="../../../overview-summary.html">
@@ -42,7 +42,7 @@
 <a name="line4"></a> * @version  0.1.0
 <a name="line5"></a> * @author  Tim Oram (mitmaro@mitmaro.ca)
 <a name="line6"></a> * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
-<a name="line7"></a> * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
+<a name="line7"></a> * @license  <a href="http:/ /www.opensource.org/licenses/mit-license.php">The MIT License</a>
 <a name="line8"></a> */
 <a name="line9"></a>
 <a name="line10"></a>namespace Framework\Logic;
@@ -76,66 +76,74 @@
 <a name="line38"></a>	protected $operator;
 <a name="line39"></a>	
 <a name="line40"></a>	/**
-<a name="line41"></a>	 * The cached value of this statement
+<a name="line41"></a>	 * Make a new statement consisting of a operator and a left and right expression
 <a name="line42"></a>	 *
-<a name="line43"></a>	 * @var mixed
-<a name="line44"></a>	 */
-<a name="line45"></a>	protected $cachedValue = null;
-<a name="line46"></a>	
-<a name="line47"></a>	/**
-<a name="line48"></a>	 * Make a new statement consisting of a operator and a left and right expression
-<a name="line49"></a>	 *
-<a name="line50"></a>	 * @param OperatorInterface $operator An operator
-<a name="line51"></a>	 * @param ExpressionInterface $left The left side expression
-<a name="line52"></a>	 * @param ExpressionInterface $right The right side expression
-<a name="line53"></a>	 */
-<a name="line54"></a>	public function __construct(OperatorInterface $operator, ExpressionInterface $left, ExpressionInterface $right = null) {
-<a name="line55"></a>		$this->operator = $operator;
-<a name="line56"></a>		$this->left = $left;
-<a name="line57"></a>		$this->right = $right;
-<a name="line58"></a>	}
-<a name="line59"></a>	
-<a name="line60"></a>	/**
-<a name="line61"></a>	 * Get the left side expression
-<a name="line62"></a>	 *
-<a name="line63"></a>	 * @return ExpressionInterface
-<a name="line64"></a>	 */
-<a name="line65"></a>	public function getLeftExpression() {
-<a name="line66"></a>		return $this->left;
-<a name="line67"></a>	}
-<a name="line68"></a>	
-<a name="line69"></a>	/**
-<a name="line70"></a>	 * Get the right side expression
-<a name="line71"></a>	 *
-<a name="line72"></a>	 * @return ExpressionInterface
-<a name="line73"></a>	 */
-<a name="line74"></a>	public function getRightExpression() {
-<a name="line75"></a>		return $this->right;
-<a name="line76"></a>	}
-<a name="line77"></a>	
-<a name="line78"></a>	/**
-<a name="line79"></a>	 * Get the operator
-<a name="line80"></a>	 *
-<a name="line81"></a>	 * @return OperatorInterface
-<a name="line82"></a>	 */
-<a name="line83"></a>	public function getOperator() {
-<a name="line84"></a>		return $this->operator;
-<a name="line85"></a>	}
-<a name="line86"></a>	
-<a name="line87"></a>	/**
-<a name="line88"></a>	 * Evaluate the statement
-<a name="line89"></a>	 *
-<a name="line90"></a>	 * @return mixed The result of the evaluation
-<a name="line91"></a>	 */
-<a name="line92"></a>	public function evaluate() {
-<a name="line93"></a>		// check for a cached value
-<a name="line94"></a>		if (is_null($this->cachedValue)) {
-<a name="line95"></a>			$this->cachedValue = $this->operator->execute($this->left, $this->right);
-<a name="line96"></a>		}
-<a name="line97"></a>		return $this->cachedValue;
-<a name="line98"></a>	}
-<a name="line99"></a>}
-<a name="line100"></a></pre>
+<a name="line43"></a>	 * @param OperatorInterface $operator An operator
+<a name="line44"></a>	 * @param ExpressionInterface $left The left side expression
+<a name="line45"></a>	 * @param ExpressionInterface $right The right side expression
+<a name="line46"></a>	 * @param DataProviderInterface $data_provider The data provider for the statement
+<a name="line47"></a>	 */
+<a name="line48"></a>	public function __construct(OperatorInterface $operator, $left, $right = null) {
+<a name="line49"></a>		$this->operator = $operator;
+<a name="line50"></a>		$this->left = $left;
+<a name="line51"></a>		$this->right = $right;
+<a name="line52"></a>	}
+<a name="line53"></a>	
+<a name="line54"></a>	/**
+<a name="line55"></a>	 * Get the left side expression
+<a name="line56"></a>	 *
+<a name="line57"></a>	 * @return ExpressionInterface
+<a name="line58"></a>	 */
+<a name="line59"></a>	public function getLeftExpression() {
+<a name="line60"></a>		return $this->left;
+<a name="line61"></a>	}
+<a name="line62"></a>	
+<a name="line63"></a>	/**
+<a name="line64"></a>	 * Get the right side expression
+<a name="line65"></a>	 *
+<a name="line66"></a>	 * @return ExpressionInterface
+<a name="line67"></a>	 */
+<a name="line68"></a>	public function getRightExpression() {
+<a name="line69"></a>		return $this->right;
+<a name="line70"></a>	}
+<a name="line71"></a>	
+<a name="line72"></a>	/**
+<a name="line73"></a>	 * Get the operator
+<a name="line74"></a>	 *
+<a name="line75"></a>	 * @return OperatorInterface
+<a name="line76"></a>	 */
+<a name="line77"></a>	public function getOperator() {
+<a name="line78"></a>		return $this->operator;
+<a name="line79"></a>	}
+<a name="line80"></a>	
+<a name="line81"></a>	/**
+<a name="line82"></a>	 * Evaluate the statement
+<a name="line83"></a>	 *
+<a name="line84"></a>	 * @param DataProviderInterface $variable_providver (Optional) The data provider for the statement
+<a name="line85"></a>	 * @return mixed The result of the evaluation
+<a name="line86"></a>	 */
+<a name="line87"></a>	public function evaluate($variable_providver = null) {
+<a name="line88"></a>		
+<a name="line89"></a>		// handle variables
+<a name="line90"></a>		if ($this->left instanceof VariableInterface) {
+<a name="line91"></a>			$data = $variable_providver->getVariable($this->left->getName());
+<a name="line92"></a>			$left = $this->left->evaluate($data)->evaluate($variable_providver);
+<a name="line93"></a>		} else {
+<a name="line94"></a>			$left = $this->left->evaluate($variable_providver);
+<a name="line95"></a>		}
+<a name="line96"></a>		if ($this->right instanceof VariableInterface) {
+<a name="line97"></a>			$data = $variable_providver->getVariable($this->right->getName());
+<a name="line98"></a>			$right = $this->right->evaluate($data)->evaluate($variable_providver);
+<a name="line99"></a>		} else if (!is_null($this->right)) {
+<a name="line100"></a>			$right = $this->right->evaluate($variable_providver);;
+<a name="line101"></a>		} else {
+<a name="line102"></a>			$right = null;
+<a name="line103"></a>		}
+<a name="line104"></a>		
+<a name="line105"></a>		return $this->operator->execute($left, $right);
+<a name="line106"></a>	}
+<a name="line107"></a>}
+<a name="line108"></a></pre>
 <div class="header">
 <h1>PHPDoctor</h1>
 <ul>

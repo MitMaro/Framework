@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+<meta name="when" content="Sat, 29 Jan 2011 05:19:12 +0000">
 
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
 <link rel="start" href="../../../../overview-summary.html">
@@ -47,7 +47,7 @@
 <a name="line9"></a>
 <a name="line10"></a>namespace Framework\Logic\Type;
 <a name="line11"></a>
-<a name="line12"></a>abstract class Base implements \Framework\Logic\TypeInterface, \Framework\Logic\ExpressionInterface {
+<a name="line12"></a>abstract class Base implements \Framework\Logic\TypeInterface {
 <a name="line13"></a>	
 <a name="line14"></a>	/**
 <a name="line15"></a>	 * The interal value of this type
@@ -66,7 +66,7 @@
 <a name="line28"></a>	/**
 <a name="line29"></a>	 * The evaluation of a type is it's value
 <a name="line30"></a>	 */
-<a name="line31"></a>	public function evaluate() {
+<a name="line31"></a>	public function evaluate($data_provider = null) {
 <a name="line32"></a>		return $this->getValue();
 <a name="line33"></a>	}
 <a name="line34"></a>	

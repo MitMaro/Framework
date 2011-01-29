@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+<meta name="when" content="Sat, 29 Jan 2011 05:19:12 +0000">
 
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
 <link rel="start" href="../../../../overview-summary.html">
@@ -57,13 +57,13 @@
 <a name="line19"></a>	/**
 <a name="line20"></a>	 * Execute the operator on the expressions
 <a name="line21"></a>	 *
-<a name="line22"></a>	 * @param ExpressionInterface $left The left hand of the operation
-<a name="line23"></a>	 * @param ExpressionInterface $right The right hand of the operation
+<a name="line22"></a>	 * @param mixed $left The left hand of the operation
+<a name="line23"></a>	 * @param mixed $right The right hand of the operation
 <a name="line24"></a>	 * 
 <a name="line25"></a>	 * @return boolean The value of the operation
 <a name="line26"></a>	 */
-<a name="line27"></a>	public function execute(ExpressionInterface $left, ExpressionInterface $right = null) {
-<a name="line28"></a>		return $left->evaluate() == $right->evaluate();
+<a name="line27"></a>	public function execute($left, $right = null) {
+<a name="line28"></a>		return $left == $right;
 <a name="line29"></a>	}
 <a name="line30"></a>}
 <a name="line31"></a></pre>

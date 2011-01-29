@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+<meta name="when" content="Sat, 29 Jan 2011 05:19:12 +0000">
 
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
 <link rel="start" href="../../../../overview-summary.html">
@@ -48,11 +48,11 @@
 <a name="line10"></a>namespace Framework\Logic\Operator;
 <a name="line11"></a>
 <a name="line12"></a>use
-<a name="line13"></a>	Framework\Logic\OperatorInterface,
+<a name="line13"></a>	Framework\Logic\UnaryOperatorInterface,
 <a name="line14"></a>	Framework\Logic\ExpressionInterface
 <a name="line15"></a>;
 <a name="line16"></a>
-<a name="line17"></a>class NotOperator implements OperatorInterface {
+<a name="line17"></a>class NotOperator implements UnaryOperatorInterface {
 <a name="line18"></a>
 <a name="line19"></a>	/**
 <a name="line20"></a>	 * Execute the operator on the expressions
@@ -63,8 +63,8 @@
 <a name="line25"></a>	 * 
 <a name="line26"></a>	 * @return boolean The value of the operation
 <a name="line27"></a>	 */
-<a name="line28"></a>	public function execute(ExpressionInterface $left, ExpressionInterface $right = null) {
-<a name="line29"></a>		return !$left->evaluate();
+<a name="line28"></a>	public function execute($left, $right = null) {
+<a name="line29"></a>		return !$left;
 <a name="line30"></a>	}
 <a name="line31"></a>}
 <a name="line32"></a></pre>

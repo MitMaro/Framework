@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+<meta name="when" content="Sat, 29 Jan 2011 05:19:12 +0000">
 
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
 <link rel="start" href="../../../../overview-summary.html">
@@ -55,10 +55,16 @@
 <a name="line17"></a>	 * @param mixed Any value that can be converted into a boolean
 <a name="line18"></a>	 */
 <a name="line19"></a>	public function __construct($value) {
-<a name="line20"></a>		$this->value = (boolean)$value;
-<a name="line21"></a>	}
-<a name="line22"></a>}
-<a name="line23"></a></pre>
+<a name="line20"></a>		if (is_string($value) && $value === 'true') {
+<a name="line21"></a>			$this->value = true;
+<a name="line22"></a>		} else if (is_string($value) && $value === 'false') {
+<a name="line23"></a>			$this->value = false;
+<a name="line24"></a>		} else {
+<a name="line25"></a>			$this->value = (boolean)$value;
+<a name="line26"></a>		}
+<a name="line27"></a>	}
+<a name="line28"></a>}
+<a name="line29"></a></pre>
 <div class="header">
 <h1>PHPDoctor</h1>
 <ul>

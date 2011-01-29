@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
-<meta name="when" content="Sun, 16 Jan 2011 21:57:26 +0000">
+<meta name="when" content="Sat, 29 Jan 2011 05:19:12 +0000">
 
 <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
 <link rel="start" href="../../overview-summary.html">
@@ -66,16 +66,12 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <dt>Copyright:</dt>
 <dd>Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)</dd>
 <dt>License:</dt>
-<dd><a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a></dd>
+<dd><a href="http:/ /www.opensource.org/licenses/mit-license.php">The MIT License</a></dd>
 </dl>
 <hr>
 
 <table id="summary_field">
 <tr><th colspan="2">Field Summary</th></tr>
-<tr>
-<td class="type">protected  mixed</td>
-<td class="description"><p class="name"><a href="#cachedValue">$cachedValue</a></p><p class="description">The cached value of this statement</p></td>
-</tr>
 <tr>
 <td class="type">protected  <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a></td>
 <td class="description"><p class="name"><a href="#left">$left</a></p><p class="description">The left expression</p></td>
@@ -94,11 +90,11 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#__construct()">__construct</a>(<a href="../../framework/logic/operatorinterface.html">OperatorInterface</a> operator, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> left, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> right)</p><p class="description">Make a new statement consisting of a operator and a left and right expression</p></td>
+<td class="description"><p class="name"><a href="#__construct()">__construct</a>(<a href="../../framework/logic/operatorinterface.html">OperatorInterface</a> operator, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> left, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> right, <a href="../../framework/logic/dataproviderinterface.html">DataProviderInterface</a> data_provider)</p><p class="description">Make a new statement consisting of a operator and a left and right expression</p></td>
 </tr>
 <tr>
 <td class="type"> mixed</td>
-<td class="description"><p class="name"><a href="#evaluate()">evaluate</a>()</p><p class="description">Evaluate the statement</p></td>
+<td class="description"><p class="name"><a href="#evaluate()">evaluate</a>(<a href="../../framework/logic/dataproviderinterface.html">DataProviderInterface</a> variable_providver)</p><p class="description">Evaluate the statement</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a></td>
@@ -115,19 +111,10 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </table>
 
 <h2 id="detail_field">Field Detail</h2>
-<a href="../../source/framework/logic/statement.php.html#line45" class="location">Framework/Logic/Statement.php at line 45</a>
-
-<h3 id="cachedValue">cachedValue</h3>
-<code class="signature">protected  mixed <strong>$cachedValue</strong> = null</code>
-<div class="details">
-<p>The cached value of this statement</p></div>
-
-<hr>
-
 <a href="../../source/framework/logic/statement.php.html#line24" class="location">Framework/Logic/Statement.php at line 24</a>
 
 <h3 id="left">left</h3>
-<code class="signature">protected  <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> <strong>$left</strong> = null</code>
+<code class="signature">protected  <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> <strong>$left</strong> = 0</code>
 <div class="details">
 <p>The left expression</p></div>
 
@@ -152,27 +139,30 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<a href="../../source/framework/logic/statement.php.html#line54" class="location">Framework/Logic/Statement.php at line 54</a>
+<a href="../../source/framework/logic/statement.php.html#line48" class="location">Framework/Logic/Statement.php at line 48</a>
 
 <h3 id="__construct()">__construct</h3>
-<code class="signature">public  void <strong>__construct</strong>(<a href="../../framework/logic/operatorinterface.html">OperatorInterface</a> operator, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> left, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> right)</code>
+<code class="signature">public  void <strong>__construct</strong>(<a href="../../framework/logic/operatorinterface.html">OperatorInterface</a> operator, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> left, <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> right, <a href="../../framework/logic/dataproviderinterface.html">DataProviderInterface</a> data_provider)</code>
 <div class="details">
 <p>Make a new statement consisting of a operator and a left and right expression</p><dl>
 <dt>Parameters:</dt>
 <dd>operator - An operator</dd>
 <dd>left - The left side expression</dd>
 <dd>right - The right side expression</dd>
+<dd>data_provider - The data provider for the statement</dd>
 </dl>
 </div>
 
 <hr>
 
-<a href="../../source/framework/logic/statement.php.html#line92" class="location">Framework/Logic/Statement.php at line 92</a>
+<a href="../../source/framework/logic/statement.php.html#line87" class="location">Framework/Logic/Statement.php at line 87</a>
 
 <h3 id="evaluate()">evaluate</h3>
-<code class="signature">public  mixed <strong>evaluate</strong>()</code>
+<code class="signature">public  mixed <strong>evaluate</strong>(<a href="../../framework/logic/dataproviderinterface.html">DataProviderInterface</a> variable_providver)</code>
 <div class="details">
 <p>Evaluate the statement</p><dl>
+<dt>Parameters:</dt>
+<dd>variable_providver - (Optional) The data provider for the statement</dd>
 <dt>Returns:</dt>
 <dd>The result of the evaluation</dd>
 </dl>
@@ -180,7 +170,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 <hr>
 
-<a href="../../source/framework/logic/statement.php.html#line65" class="location">Framework/Logic/Statement.php at line 65</a>
+<a href="../../source/framework/logic/statement.php.html#line59" class="location">Framework/Logic/Statement.php at line 59</a>
 
 <h3 id="getLeftExpression()">getLeftExpression</h3>
 <code class="signature">public  <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> <strong>getLeftExpression</strong>()</code>
@@ -189,7 +179,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 <hr>
 
-<a href="../../source/framework/logic/statement.php.html#line83" class="location">Framework/Logic/Statement.php at line 83</a>
+<a href="../../source/framework/logic/statement.php.html#line77" class="location">Framework/Logic/Statement.php at line 77</a>
 
 <h3 id="getOperator()">getOperator</h3>
 <code class="signature">public  <a href="../../framework/logic/operatorinterface.html">OperatorInterface</a> <strong>getOperator</strong>()</code>
@@ -198,7 +188,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 <hr>
 
-<a href="../../source/framework/logic/statement.php.html#line74" class="location">Framework/Logic/Statement.php at line 74</a>
+<a href="../../source/framework/logic/statement.php.html#line68" class="location">Framework/Logic/Statement.php at line 68</a>
 
 <h3 id="getRightExpression()">getRightExpression</h3>
 <code class="signature">public  <a href="../../framework/logic/expressioninterface.html">ExpressionInterface</a> <strong>getRightExpression</strong>()</code>
