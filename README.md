@@ -12,14 +12,17 @@ Not sure how accurate this is, this is the first time I ever wrote a formal synt
     statement            = statement, { white space }, operator, { white space }, statement ;
     statement            = expression, { white space }, operator, { white space }, statement ;
     statement            = expression, { white space }, operator, { white space }, expression ;
+    statement            = unary operator, { white space }, statement ;
+    statement            = unary operator, { white space }, expression ;
     statement            = "(", { white space }, statement, { white space }, ")" ;
     expression           = type, white space, value ;
     expression           = type, white space, quoted value ;
     expression           = type, white space, variable ;
-    operator             = "&&" | "==" | ">=" | ">" | "===" | "<=" | "<" | "!=" | "!==" | "!" | "||"
+    operator             = "&&" | "==" | ">=" | ">" | "===" | "<=" | "<" | "!=" | "!==" | "||" ;
+    operator             = "|" ;
     type                 = "Boolean" | "Float" | "Integer" | "String" ;
     variable             = "$", alpha numeric , { alpha numeric } ;
-    value                = alpha numeric, { alpha numeric }
+    value                = alpha numeric, { alpha numeric } ;
     quoted value         = '"' , { all characters - '"', "\"" } , '"' ;
     alphabetic character = "A" | "B" | "C" | "D" | "E" | "F" | "G"
                            | "H" | "I" | "J" | "K" | "L" | "M" | "N"
@@ -30,10 +33,11 @@ Not sure how accurate this is, this is the first time I ever wrote a formal synt
                            | "q" | "r" | "s" | "t" | "u" | "v" | "w"
                            | "x" | "y" | "z" ;
     digit                = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
-    alpha numeric        = alphabetic character | digit
+    alpha numeric        = alphabetic character | digit ;
     white space          = ? white space characters ? ;
     all characters       = ? all visible characters ? ;
 
 ** Current Limitations **
 
 * Some values such as negative numbers need to be enclosed in quotes for them to work.
+* Delimiters can be mixed
