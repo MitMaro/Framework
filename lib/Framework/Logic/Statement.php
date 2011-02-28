@@ -11,7 +11,9 @@ namespace Framework\Logic;
 
 use
 	Framework\Logic\ExpressionInterface,
-	Framework\Logic\OperatorInterface
+	Framework\Logic\OperatorInterface,
+	Framework\Logic\DataProviderInterface,
+	Framework\Logic\Exception\UndefinedVariable
 ;
 
 class Statement implements ExpressionInterface {
@@ -38,6 +40,22 @@ class Statement implements ExpressionInterface {
 	protected $operator;
 	
 	/**
+	 * The global variable provider
+	 *
+	 * @static
+	 * @var \Framework\Logic\DataProviderInterface
+	 */
+	protected static $variable_data_provider = null;
+	
+	/**
+	 * The local variable provider
+	 *
+	 * @static
+	 * @var \Framework\Logic\DataProviderInterface
+	 */
+	protected $local_variable_data_provider = null;
+	
+	/**
 	 * Make a new statement consisting of a operator and a left and right expression
 	 *
 	 * @param OperatorInterface $operator An operator
@@ -45,10 +63,16 @@ class Statement implements ExpressionInterface {
 	 * @param ExpressionInterface $right The right side expression
 	 * @param DataProviderInterface $data_provider The data provider for the statement
 	 */
-	public function __construct(OperatorInterface $operator, $left, $right = null) {
+	public function __construct(
+		OperatorInterface $operator,
+		$left,
+		$right = null,
+		DataProviderInterface $variable_data_provider = null
+	) {
 		$this->operator = $operator;
 		$this->left = $left;
 		$this->right = $right;
+		$this->local_variable_data_provider = $variable_data_provider;
 	}
 	
 	/**
@@ -81,27 +105,55 @@ class Statement implements ExpressionInterface {
 	/**
 	 * Evaluate the statement
 	 *
-	 * @param DataProviderInterface $variable_providver (Optional) The data provider for the statement
+	 * @param DataProviderInterface $variable_data_provider (Optional) The data provider for the statement
 	 * @return mixed The result of the evaluation
 	 */
-	public function evaluate($variable_providver = null) {
+	public function evaluate(DataProviderInterface $variable_data_provider = null) {
+		
+		// merge the statement local variables into the varaibles passed down
+		if (is_null($variable_data_provider)) {
+			$variable_data_provider = $this->local_variable_data_provider;
+		} else if (!is_null($this->local_variable_data_provider)){
+			$variable_data_provider->merge($this->local_variable_data_provider);
+		}
 		
 		// handle variables
 		if ($this->left instanceof VariableInterface) {
-			$data = $variable_providver->getVariable($this->left->getName());
-			$left = $this->left->evaluate($data)->evaluate($variable_providver);
+			if (isset($variable_data_provider[$this->left->getName()])) {
+				$data = $variable_data_provider[$this->left->getName()];
+			} else if (isset(self::$variable_data_provider[$this->left->getName()])) {
+				$data = self::$variable_data_provider[$this->left->getName()];
+			} else {
+				throw new UndefinedVariable('The variable, ' . $this->left->getName() . ', is undefined.');
+			}
+			$left = $this->left->evaluate($data)->evaluate($variable_data_provider);
 		} else {
-			$left = $this->left->evaluate($variable_providver);
+			$left = $this->left->evaluate($variable_data_provider);
 		}
 		if ($this->right instanceof VariableInterface) {
-			$data = $variable_providver->getVariable($this->right->getName());
-			$right = $this->right->evaluate($data)->evaluate($variable_providver);
+			if (isset($variable_data_provider[$this->right->getName()])) {
+				$data = $variable_data_provider[$this->right->getName()];
+			} else if (isset(self::$variable_data_provider[$this->right->getName()])) {
+				$data = self::$variable_data_provider[$this->right->getName()];
+			} else {
+				throw new UndefinedVariable('The variable, ' . $this->right->getName() . ', is undefined.');
+			}
+			$right = $this->right->evaluate($data)->evaluate($variable_data_provider);
 		} else if (!is_null($this->right)) {
-			$right = $this->right->evaluate($variable_providver);;
+			$right = $this->right->evaluate($variable_data_provider);
 		} else {
 			$right = null;
 		}
 		
 		return $this->operator->execute($left, $right);
+	}
+	
+	/**
+	 * Set the global variable provider
+	 *
+	 * @param DataProviderInterface $variable_data_provider
+	 */
+	public static function setGlobalVariableProvider(DataProviderInterface $variable_data_provider) {
+		self::$variable_data_provider = $variable_data_provider;
 	}
 }

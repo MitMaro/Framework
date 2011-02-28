@@ -12,6 +12,7 @@ namespace Framework\Logic;
 interface ExpressionInterface {
 	/**
 	 * Evaluate the expression
+	 * @param DataProviderInterface $variable_providver (Optional) The data provider for the statement
 	 */
-	public function evaluate();
+	public function evaluate(DataProviderInterface $variable_data_provider = null);
 }

@@ -9,7 +9,7 @@
 
 namespace Framework\Logic;
 
-interface DataProviderInterface {
+interface DataProviderInterface extends \ArrayAccess {
 	
 	/**
 	 * Get the value associated with the name provided
@@ -18,5 +18,12 @@ interface DataProviderInterface {
 	 * @return mixed The value
 	 */
 	public function getVariable($name);
+	
+	/**
+	 * Get the variables
+	 *
+	 * @return mixed All the varaibles
+	 */
+	public function getVariables();
 	
 }

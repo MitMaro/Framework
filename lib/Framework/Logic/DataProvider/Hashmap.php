@@ -32,6 +32,15 @@ class Hashmap implements \Framework\Logic\DataProviderInterface {
 	}
 	
 	/**
+	 * Get the variables
+	 *
+	 * @return mixed All the varaibles
+	 */
+	public function getVariables() {
+		return $this->data;
+	}
+	
+	/**
 	 * Add a variable
 	 *
 	 * @param scalar $name The name
@@ -39,6 +48,59 @@ class Hashmap implements \Framework\Logic\DataProviderInterface {
 	 */
 	public function addVariable($name, $value) {
 		$this->data[$name] = $value;
+	}
+	
+	/**
+	 * Merge another variable provider into this one, overwritting existing values
+	 *
+	 * @param scalar $name The name
+	 * @param mixed $value The value
+	 */
+	public function merge(self $variable_provider) {
+		foreach($variable_provider->getVariables() as $name => $value) {
+			$this->addVariable($name, $value);
+		}
+	}
+	
+	/**
+	 * Returns true is the variable exists
+	 * 
+	 * @param string $name The name
+	 * @return boolean True is the property exists, false if not
+	 */
+	public function offsetExists($name)
+	{
+		return isset($this->data[$name]);
+	}
+	
+	/**
+	 * Get a variable
+	 * 
+	 * @param string $name The name of the property
+	 * @return mixed Returns the value of the property requested
+	 */
+	public function offsetGet($name)
+	{
+		return $this->getVariable($name);
+	}
+	
+	/**
+	 * Unset the variable
+	 *
+	 * @param scalar $name The name
+	 */
+	public function offsetUnset($name) {
+		unset($this->data[$name]);
+	}
+	
+	/**
+	 * Add a variable
+	 *
+	 * @param scalar $name The name
+	 * @param mixed $value The value
+	 */
+	public function offsetSet($name, $value) {
+		$this->addVariable($name, $value);
 	}
 	
 }

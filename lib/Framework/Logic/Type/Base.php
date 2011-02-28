@@ -9,7 +9,13 @@
 
 namespace Framework\Logic\Type;
 
-abstract class Base implements \Framework\Logic\TypeInterface {
+use
+	Framework\Logic\TypeInterface,
+	Framework\Logic\ExpressionInterface,
+	Framework\Logic\DataProviderInterface
+;
+
+abstract class Base implements TypeInterface {
 	
 	/**
 	 * The interal value of this type
@@ -27,8 +33,9 @@ abstract class Base implements \Framework\Logic\TypeInterface {
 	
 	/**
 	 * The evaluation of a type is it's value
+	 * @param DataProviderInterface $variable_providver (Optional) The data provider for the statement
 	 */
-	public function evaluate($data_provider = null) {
+	public function evaluate(DataProviderInterface $variable_data_provider = null) {
 		return $this->getValue();
 	}
 	

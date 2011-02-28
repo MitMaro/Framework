@@ -126,4 +126,104 @@ class LogicStatement_Test extends PHPUnit_Framework_TestCase {
 		
 	}
 	
+	/**
+	 * @covers \Framework\Logic\Statement::evaluate
+	 * @covers \Framework\Logic\Statement::setGlobalVariableProvider
+	 */
+	public function test_GloablVariablesStatement() {
+		$statement = new Statement(
+			new AndOperator(),
+			new Variable('\Framework\Logic\Type\Boolean', 'abc'),
+			new Variable('\Framework\Logic\Type\Boolean', 'def')
+		);
+		
+		$data = new Hashmap();
+		$data->addVariable('abc', true);
+		$data->addVariable('def', true);
+		
+		Statement::setGlobalVariableProvider($data);
+		
+		$this->assertTrue($statement->evaluate());
+		
+		// reset GlobalVariableProvider
+		Statement::setGlobalVariableProvider(new Hashmap());
+	}
+	
+	/**
+	 * @covers \Framework\Logic\Statement::evaluate
+	 */
+	public function test_LocalVariablesStatement() {
+		
+		$data = new Hashmap();
+		$data->addVariable('abc', true);
+		$data->addVariable('def', true);
+		
+		$statement = new Statement(
+			new AndOperator(),
+			new Variable('\Framework\Logic\Type\Boolean', 'abc'),
+			new Variable('\Framework\Logic\Type\Boolean', 'def'),
+			$data
+		);
+		
+		$this->assertTrue($statement->evaluate());
+		
+	}
+	
+	/**
+	 * @covers \Framework\Logic\Statement::evaluate
+	 */
+	public function test_LocalVariablesStatementWithLocalEvaluateStatement() {
+		
+		$data = new Hashmap();
+		$data->addVariable('abc', true);
+		
+		$statement = new Statement(
+			new AndOperator(),
+			new Variable('\Framework\Logic\Type\Boolean', 'abc'),
+			new Variable('\Framework\Logic\Type\Boolean', 'def'),
+			$data
+		);
+		
+		$data2 = new Hashmap();
+		$data2->addVariable('def', true);
+		
+		$this->assertTrue($statement->evaluate($data2));
+		
+	}
+	
+	/**
+	 * @covers \Framework\Logic\Statement::evaluate
+	 * @expectedException \Framework\Logic\Exception\UndefinedVariable
+	 */
+	public function test_evaluateMissingVariableLeft() {
+		
+		$statement = new Statement(
+			new AndOperator(),
+			new Variable('\Framework\Logic\Type\Boolean', 'abc'),
+			new Variable('\Framework\Logic\Type\Boolean', 'def')
+		);
+		
+		$statement->evaluate();
+		
+	}
+	/**
+	 * @covers \Framework\Logic\Statement::evaluate
+	 * @expectedException \Framework\Logic\Exception\UndefinedVariable
+	 */
+	public function test_evaluateMissingVariableRight() {
+		
+		$data = new Hashmap();
+		$data->addVariable('abc', true);
+		
+		$statement = new Statement(
+			new AndOperator(),
+			new Variable('\Framework\Logic\Type\Boolean', 'abc'),
+			new Variable('\Framework\Logic\Type\Boolean', 'def'),
+			$data
+		);
+		
+		$statement->evaluate();
+		
+	}
+	
 }
