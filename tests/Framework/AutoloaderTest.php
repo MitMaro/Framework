@@ -31,7 +31,7 @@ class Autoloader_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testFileExists_True() {
 		$oldPath = get_include_path();
-		set_include_path(realpath(dirname(__FILE__) . '/../data/autoloader'));
+		set_include_path(realpath(dirname(__FILE__) . '/../data/autoloader') . ':' . $oldPath);
 		$this->assertTrue(Autoloader::fileExists('/TestFile.php')); // with path
 		set_include_path($oldPath);
 		
@@ -73,6 +73,13 @@ class Autoloader_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testClassLoader_Pattern() {
 		$this->assertTrue($this->autoloader->classLoader('\UnitTesting\NS1\NS2\TestClass3'));
+	}
+	
+	/**
+	 * @covers \Framework\Autoloader::classLoader
+	 */
+	public function testClassLoader_PatternNoClass() {
+		$this->assertFalse($this->autoloader->classLoader('\UnitTesting\NS1\NS2\TestClass99'));
 	}
 	
 	/**
