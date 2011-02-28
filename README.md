@@ -19,7 +19,7 @@ Not sure how accurate this is, this is the first time I ever wrote a formal synt
     expression           = type, white space, quoted value ;
     expression           = type, white space, variable ;
     operator             = "&&" | "==" | ">=" | ">" | "===" | "<=" | "<" | "!=" | "!==" | "||" ;
-    operator             = "|" ;
+    unary operator       = "!" ;
     type                 = "Boolean" | "Float" | "Integer" | "String" ;
     variable             = "$", alpha numeric , { alpha numeric } ;
     value                = alpha numeric, { alpha numeric } ;
