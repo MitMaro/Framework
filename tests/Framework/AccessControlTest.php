@@ -6,227 +6,78 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
+namespace Framework\Tests;
+
 use
-	\Framework\AccessControl,
-	\Framework\AccessControl\Permission,
-	\Framework\AccessControl\Role,
-	\Framework\AccessControl\Resource,
-	\Framework\AccessControl\User
+	Framework\AccessControl,
+	Framework\AccessControl\AssertionInterface
 ;
 
-class AccessControl_Test extends PHPUnit_Framework_TestCase {
+class AccessControl_test extends \PHPUnit_Framework_TestCase {
 	
 	/**
-	 * Test addResourcePermissions and getResources
-	 * @covers \Framework\AccessControl::addResourcePermissions
-	 * @covers \Framework\AccessControl::getResources
+	 * @covers \Framework\AccessControl::addAssertion
 	 */
-	public function testAddResourcePermissions() {
-		
-		$resource = new Resource('id1');
-		
-		$permissions = array(
-			1 => new Permission(1),
-			2 => new Permission(2),
-		);
+	public function test_addAssertion_class() {
 		
 		$accessControl = new AccessControl();
 		
-		$accessControl->addResourcePermissions($resource, $permissions);
-		
-		$resources = $accessControl->getResources();
-		
-		$this->assertEquals(1, count($resources));
-		$this->assertEquals($permissions, $resources[$resource->getId()]->getPermissions());
-		
-		return $accessControl;
+		$accessControl->addAssertion('test', new TestTrueAssertion());
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::addResource
+	 * @covers \Framework\AccessControl::addAssertion
 	 */
-	public function testAddResource() {
-		
-		$resource = new Resource('id1');
+	public function test_addAssertion_name() {
 		
 		$accessControl = new AccessControl();
 		
-		$accessControl->addResource($resource);
-		
-		$resources = $accessControl->getResources();
-		
-		$this->assertEquals(1, count($resources));
-		$this->assertTrue(isset($resources[$resource->getId()]));
-		
+		$accessControl->addAssertion('test', 'Framework\Tests\TestTrueAssertion');
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::verifyAccess
-	 * @depends testAddResourcePermissions
+	 * @covers \Framework\AccessControl::isAllowed
 	 */
-	public function testVerifyAccess_Allowed(AccessControl $accessControl) {
-		AccessControl::setDefaultAccess(false);
-		
-		$user = new User('u1');
-		$role = new Role('r1');
-		$role->addPermissions(array(
-			1 => new Permission(1),
-			2 => new Permission(2),
-		));
-		$user->addRoles($role);
-		
-		$this->assertTrue($accessControl->verifyAccess(new Resource('id1'), $user));
-	}
-	
-	/**
-	 * @covers \Framework\AccessControl::verifyAccess
-	 * @depends testAddResourcePermissions
-	 */
-	public function testVerifyAccess_Denied(AccessControl $accessControl) {
-		AccessControl::setDefaultAccess(true);
-		
-		$user = new User('u1');
-		$user->addRoles(new Role('r1'));
-		
-		$this->assertFalse($accessControl->verifyAccess(new Resource('id1'), $user));
-	}
-	
-	/**
-	 * @covers \Framework\AccessControl::verifyAccess
-	 * @depends testAddResourcePermissions
-	 */
-	public function testVerifyAccess_AllowedDefault(AccessControl $accessControl) {
-		AccessControl::setDefaultAccess(true);
-		
-		$user = new User('u1');
-		$user->addRoles(new Role('r1'));
-		
-		$this->assertTrue($accessControl->verifyAccess(new Resource('id2'), $user));
-	}
-	
-	/**
-	 * @covers \Framework\AccessControl::verifyAccess
-	 * @depends testAddResourcePermissions
-	 */
-	public function testVerifyAccess_DeniedDefault(AccessControl $accessControl) {
-		AccessControl::setDefaultAccess(false);
-		
-		$user = new User('u1');
-		$user->addRoles(new Role('r1'));
-		
-		$this->assertFalse($accessControl->verifyAccess(new Resource('id2'), $user));
-	}
-	
-	/**
-	 * @covers \Framework\AccessControl::mirror
-	 */
-	public function testMirror_Regular() {
-		$accessControl = new AccessControl();
-		
-		$resource = new Resource('id1');
-		
-		$accessControl->addResource($resource);
-		
-		$accessControl->mirror($resource->getId(), 'id2');
-		
-		$resources = $accessControl->getResources();
-		
-		$this->assertTrue(isset($resources['id1']));
-		$this->assertTrue(isset($resources['id2']));
-		
-	}
-	
-	/**
-	 * @covers \Framework\AccessControl::mirror
-	 */
-	public function testMirror_Switched() {
-		$accessControl = new AccessControl();
-		
-		$resource = new Resource('id1');
-		
-		$accessControl->addResource($resource);
-		
-		$accessControl->mirror('id2', $resource->getId());
-		
-		$resources = $accessControl->getResources();
-		
-		$this->assertTrue(isset($resources['id1']));
-		$this->assertTrue(isset($resources['id2']));
-		
-	}
-	
-	/**
-	 * @covers \Framework\AccessControl::mirror
-	 * @expectedException \Framework\AccessControl\Exception
-	 */
-	public function testMirror_Exception() {
+	public function test_isAllowed_named() {
 		
 		$accessControl = new AccessControl();
 		
-		$accessControl->mirror('id2', 'id1');
+		$accessControl->addAssertion('test', new TestTrueAssertion());
 		
-	}
-	
-	
-	/**
-	 * @covers \Framework\AccessControl::setDefaultAccess
-	 * @covers \Framework\AccessControl::getDefaultAccess
-	 */
-	public function testSetGetDefaultAccess_True() {
-		AccessControl::setDefaultAccess(true);
-		$this->assertTrue(AccessControl::getDefaultAccess());
+		$this->assertTrue($accessControl->isAllowed('test', null));
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::setDefaultAccess
-	 * @covers \Framework\AccessControl::getDefaultAccess
+	 * @covers \Framework\AccessControl::isAllowed
 	 */
-	public function testSetGetDefaultAccess_False() {
-		AccessControl::setDefaultAccess(false);
-		$this->assertFalse(AccessControl::getDefaultAccess());
+	public function test_isAllowed_class() {
+		
+		$accessControl = new AccessControl();
+		
+		$this->assertTrue($accessControl->isAllowed(new TestTrueAssertion(), null));
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::verifyUserResourceAccess
+	 * @covers \Framework\AccessControl::isAllowed
+	 * @expectedException \Framework\AccessControl\Exception\InvalidAssertion
 	 */
-	public function testVerifyUserResourceAccess_True() {
+	public function test_isAllowed_exceptions() {
 		
-		$permissions = array(
-			1 => new Permission(1),
-			2 => new Permission(2),
-		);
+		$accessControl = new AccessControl();
 		
-		$resource = new Resource('id1');
-		$resource->addPermissions($permissions);
-		
-		$user = new User('u1');
-		$role = new Role('r1');
-		$role->addPermissions($permissions);
-		
-		$user->addRoles($role);
-		
-		$this->assertTrue(AccessControl::verifyUserResourceAccess($user, $resource));
-		
+		$accessControl->isAllowed('invalid', null);
 	}
 	
-	
-	/**
-	 * @covers \Framework\AccessControl::verifyUserResourceAccess
-	 */
-	public function testVerifyUserResourceAccess_False() {
-		
-		$permissions = array(
-			1 => new Permission(1),
-			2 => new Permission(2),
-		);
-		
-		$resource = new Resource('id1');
-		$resource->addPermissions($permissions);
-		
-		$user = new User('u1');
-		
-		$this->assertFalse(AccessControl::verifyUserResourceAccess($user, $resource));
-		
+}
+
+class TestTrueAssertion implements AssertionInterface {
+	public function assert($name, $role, $data){
+		return true;
 	}
-	
+}
+
+class TestFalseAssertion implements AssertionInterface {
+	public function assert($name, $role, $data){
+		return false;
+	}
 }

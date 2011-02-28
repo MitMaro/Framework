@@ -6,17 +6,18 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
+namespace Framework\Tests\AccessControl\RoleBased;
+
 use
-	\Framework\AccessControl\Permission,
-	\Framework\AccessControl\Role
+	\Framework\AccessControl\RoleBased\Permission,
+	\Framework\AccessControl\RoleBased\Role
 ;
 
-class AccessControl_Role_Test extends PHPUnit_Framework_TestCase {
+class AccessControl_Role_Test extends \PHPUnit_Framework_TestCase {
 	
 	/**
-	 * Test constructor and getId
-	 * @covers \Framework\AccessControl\Role::__construct
-	 * @covers \Framework\AccessControl\Role::getId
+	 * @covers \Framework\AccessControl\RoleBased\Role::__construct
+	 * @covers \Framework\AccessControl\RoleBased\Role::getIdentifier
 	 */
 	public function testConstructor() {
 		
@@ -24,13 +25,12 @@ class AccessControl_Role_Test extends PHPUnit_Framework_TestCase {
 		
 		$role = new Role($id);
 		
-		$this->assertEquals($id, $role->getId());
+		$this->assertEquals($id, $role->getIdentifier());
 	}
 	
 	/**
-	 * Test addPermission and getPermissions
-	 * @covers \Framework\AccessControl\Role::addPermissions
-	 * @covers \Framework\AccessControl\Role::getPermissions
+	 * @covers \Framework\AccessControl\RoleBased\Role::addPermissions
+	 * @covers \Framework\AccessControl\RoleBased\Role::getPermissions
 	 */
 	public function testAddPermission() {
 		$permissions = array(
@@ -48,9 +48,8 @@ class AccessControl_Role_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * Test addPermission and getPermissions
-	 * @covers \Framework\AccessControl\Role::addPermissions
-	 * @covers \Framework\AccessControl\Role::getPermissions
+	 * @covers \Framework\AccessControl\RoleBased\Role::addPermissions
+	 * @covers \Framework\AccessControl\RoleBased\Role::getPermissions
 	 */
 	public function testAddPermission_NotArray() {
 		$role = new Role(1);

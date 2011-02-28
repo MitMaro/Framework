@@ -2,16 +2,15 @@
 /**
  * Describes a resource
  * 
- * @package  Framework\AccessControl
- * @version  0.1.0
+ * @package  Framework\AccessControl\RoleBased
  * @author  Tim Oram (mitmaro@mitmaro.ca)
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-namespace Framework\AccessControl;
+namespace Framework\AccessControl\RoleBased;
 
-class Resource {
+class Resource implements ResourceInterface {
 	
 	/**
 	 * A unique identifier for the resource
@@ -44,7 +43,7 @@ class Resource {
 			$permissions = array($permissions);
 		}
 		foreach ($permissions as $permission) {
-			$this->permissions[$permission->getId()] = $permission;
+			$this->permissions[$permission->getIdentifier()] = $permission;
 		}
 	}
 	
@@ -61,34 +60,8 @@ class Resource {
 	 * Get the unique identifier for the resource
 	 * @return mixed The unique identifier for this resource
 	 */
-	public function getId() {
+	public function getIdentifier() {
 		return $this->id;
-	}
-	
-	/**
-	 * Checks is the supplied user has the permissions to access this resource
-	 *
-	 * @param User $user The user object to check against
-	 * @return boolean True is user has access, false otherwise
-	 */
-	public function checkUserPermissions(User $user) {
-		$required = $this->permissions;
-		foreach ($user->getRoles() as $role) {
-			foreach ($role->getPermissions() as $permission) {
-				// if the supplied permission is required, remove it
-				if (isset($required[$permission->getId()])) {
-					unset($required[$permission->getId()]);
-				}
-			}
-			// short circuit return true is the required permissions were all found
-			if (count($required) == 0) {
-				return true;
-			}
-		}
-		
-		// if the number of elements in the $required array is not 0
-		// then there was a missing permission
-		return count($required) == 0;
 	}
 	
 }

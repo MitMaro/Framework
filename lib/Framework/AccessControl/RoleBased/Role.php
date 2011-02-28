@@ -2,16 +2,16 @@
 /**
  * Describes a role
  * 
- * @package  Framework\AccessControl
+ * @package  Framework\AccessControl\RoleBased
  * @version  0.1.0
  * @author  Tim Oram (mitmaro@mitmaro.ca)
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-namespace Framework\AccessControl;
+namespace Framework\AccessControl\RoleBased;
 
-class Role {
+class Role implements RoleInterface {
 	
 	/**
 	 * A unique identifier for the role
@@ -45,7 +45,7 @@ class Role {
 		}
 		foreach ($permissions as $permission) {
 			// set to false by default, makes the check later easier
-			$this->permissions[$permission->getId()] = $permission;
+			$this->permissions[$permission->getIdentifier()] = $permission;
 		}
 	}
 	
@@ -63,7 +63,7 @@ class Role {
 	 * Get the unique identifier for the role
 	 * @return mixed The unique identifier for this role
 	 */
-	public function getId() {
+	public function getIdentifier() {
 		return $this->id;
 	}
 	
