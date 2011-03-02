@@ -13,7 +13,9 @@ use
 	Framework\Logic\Lexer,
 	Framework\Logic\LexerInterface,
 	Framework\Logic\ExpressionInterface,
-	Framework\Logic\OperatorInterface
+	Framework\Logic\Type\TypeInterface,
+	Framework\Logic\Operator\OperatorInterface,
+	Framework\Logic\Operator\UnaryOperatorInterface
 ;
 
 class Parser {

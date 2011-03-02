@@ -11,8 +11,6 @@ use
 	\Framework\Logic\Type,
 	\Framework\Logic\Variable,
 	\Framework\Logic\Operator,
-	\Framework\Logic\OperatorInterface,
-	\Framework\Logic\ExpressionInterface,
 	\Framework\Logic\LeftDelimiter,
 	\Framework\Logic\RightDelimiter
 ;

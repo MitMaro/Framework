@@ -10,9 +10,9 @@
 namespace Framework\Logic\Type;
 
 use
-	Framework\Logic\TypeInterface,
+	Framework\Logic\Type\TypeInterface,
 	Framework\Logic\ExpressionInterface,
-	Framework\Logic\DataProviderInterface
+	Framework\Logic\DataProvider\DataProviderInterface
 ;
 
 abstract class Base implements TypeInterface {

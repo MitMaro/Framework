@@ -9,6 +9,10 @@
 
 namespace Framework\Logic;
 
+use
+	Framework\Logic\DataProvider\DataProviderInterface
+;
+
 interface ExpressionInterface {
 	/**
 	 * Evaluate the expression

@@ -10,7 +10,7 @@ namespace Framework\Tests;
 
 use
 	Framework\AccessControl,
-	Framework\AccessControl\AssertionInterface
+	Framework\AccessControl\Assertion\AssertionInterface
 ;
 
 class AccessControl_test extends \PHPUnit_Framework_TestCase {

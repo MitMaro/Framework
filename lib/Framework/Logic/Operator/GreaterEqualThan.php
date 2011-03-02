@@ -9,11 +9,6 @@
 
 namespace Framework\Logic\Operator;
 
-use
-	Framework\Logic\OperatorInterface,
-	Framework\Logic\ExpressionInterface
-;
-
 class GreaterEqualThan implements OperatorInterface {
 
 	/**

@@ -12,7 +12,7 @@
 namespace Framework\AccessControl\Assertion\Logic;
 
 use
-	Framework\AccessControl\AssertionInterface,
+	Framework\AccessControl\Assertion\AssertionInterface,
 	Framework\AccessControl\RoleBased\Permission
 ;
 

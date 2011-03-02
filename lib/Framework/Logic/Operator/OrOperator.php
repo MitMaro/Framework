@@ -9,21 +9,17 @@
 
 namespace Framework\Logic\Operator;
 
-use
-	Framework\Logic\OperatorInterface,
-	Framework\Logic\ExpressionInterface
-;
-
 class OrOperator implements OperatorInterface {
 
 	/**
 	 * Execute the operator on the expressions
 	 *
-	 * @param ExpressionInterface $left The left hand of the operation
-	 * @param ExpressionInterface $right The right hand of the operation
+	 * @param mixed $left The left hand of the operation
+	 * @param mixed $right The right hand of the operation
 	 * 
 	 * @return boolean The value of the operation
-	 */	public function execute($left, $right = null) {
+	 */
+	public function execute($left, $right = null) {
 		return $left || $right;
 	}
 }

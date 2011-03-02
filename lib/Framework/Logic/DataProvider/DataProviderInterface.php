@@ -7,7 +7,7 @@
  * @license  <a href="http:/ /www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-namespace Framework\Logic;
+namespace Framework\Logic\DataProvider;
 
 interface DataProviderInterface extends \ArrayAccess {
 	

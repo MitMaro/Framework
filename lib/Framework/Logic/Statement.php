@@ -11,8 +11,8 @@ namespace Framework\Logic;
 
 use
 	Framework\Logic\ExpressionInterface,
-	Framework\Logic\OperatorInterface,
-	Framework\Logic\DataProviderInterface,
+	Framework\Logic\Operator\OperatorInterface,
+	Framework\Logic\DataProvider\DataProviderInterface,
 	Framework\Logic\Exception\UndefinedVariable
 ;
 

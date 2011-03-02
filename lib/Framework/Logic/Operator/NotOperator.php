@@ -9,19 +9,14 @@
 
 namespace Framework\Logic\Operator;
 
-use
-	Framework\Logic\UnaryOperatorInterface,
-	Framework\Logic\ExpressionInterface
-;
-
 class NotOperator implements UnaryOperatorInterface {
 
 	/**
 	 * Execute the operator on the expressions
 	 *
-	 * @param ExpressionInterface $left The left hand of the operation
-	 * @param ExpressionInterface $right (Optional) The right hand of the operation, optional for
-	 *                                   operations that do not need a right side of the operation.
+	 * @param mixed $left The left hand of the operation
+	 * @param mixed $right (Optional) The right hand of the operation, optional for
+	 *                                operations that do not need a right side of the operation.
 	 * 
 	 * @return boolean The value of the operation
 	 */

@@ -10,7 +10,7 @@
 namespace Framework;
 
 use
-	Framework\AccessControl\AssertionInterface
+	Framework\AccessControl\Assertion\AssertionInterface
 ;
 
 class AccessControl {

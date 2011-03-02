@@ -9,7 +9,7 @@
 
 namespace Framework\Logic\DataProvider;
 
-class Hashmap implements \Framework\Logic\DataProviderInterface {
+class Hashmap implements DataProviderInterface {
 	
 	/**
 	 * The data array
