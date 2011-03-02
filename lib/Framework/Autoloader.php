@@ -12,7 +12,7 @@
  * </pre>
  *
  * This will autoload all classes that begin with the namespace MyNameSpace to that directory using
- * the remainder of the namespace to figure out the path. That is, using the autloader setup from
+ * the remainder of the namespace to figure out the path. That is, using the autoloader setup from
  * above, the class '\MyNameSpace\Admin\User' would map to '/path/to/namespace/root/Admin/User.php'.
  *
  * <h4>Mutltiple Directories Per Namespace</h4>
