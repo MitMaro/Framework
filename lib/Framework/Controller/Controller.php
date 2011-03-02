@@ -1,6 +1,6 @@
 <?php
 /**
- * @package  Framework
+ * @package  Framework\Controller
  * @version  0.1.0
  * @author  Tim Oram (mitmaro@mitmaro.ca)
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
@@ -12,7 +12,12 @@
  * </ul>
  */
 
-namespace Framework;
+namespace Framework\Controller;
+
+use
+	Framework\Request\Request,
+	Framework\View\View
+;
 
 class Controller {
 	

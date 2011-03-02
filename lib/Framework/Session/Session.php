@@ -16,7 +16,7 @@
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
-namespace Framework;
+namespace Framework\Session;
 
 class Session {
 	

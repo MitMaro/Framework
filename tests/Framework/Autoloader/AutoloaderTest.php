@@ -9,7 +9,7 @@
  */
 
 use
-	\Framework\Autoloader
+	\Framework\Autoloader\Autoloader
 ;
 
 class Autoloader_Test extends PHPUnit_Framework_TestCase {
@@ -18,81 +18,81 @@ class Autoloader_Test extends PHPUnit_Framework_TestCase {
 		$this->autoloader = new Autoloader();
 		$this->autoloader->addNamespace(
 			'UnitTesting',
-			realpath(__DIR__ . '/../data/autoloader/UnitTesting/')
+			realpath(__DIR__ . '/../../data/autoloader/UnitTesting/')
 		);
 		$this->autoloader->addNamespace(
 			'UnitTesting',
-			realpath(__DIR__ . '/../data/autoloader/UnitTesting') . '/:2/:1'
+			realpath(__DIR__ . '/../../data/autoloader/UnitTesting') . '/:2/:1'
 		);
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::fileExists
+	 * @covers \Framework\Autoloader\Autoloader::fileExists
 	 */
 	public function testFileExists_True() {
 		$oldPath = get_include_path();
-		set_include_path(realpath(dirname(__FILE__) . '/../data/autoloader') . ':' . $oldPath);
+		set_include_path(realpath(__DIR__ . '/../../data/autoloader') . ':' . $oldPath);
 		$this->assertTrue(Autoloader::fileExists('/TestFile.php')); // with path
 		set_include_path($oldPath);
 		
-		$path = realpath(__DIR__ . '/../data/autoloader/UnitTesting/');
+		$path = realpath(__DIR__ . '/../../data/autoloader/UnitTesting/');
 		$this->assertTrue(Autoloader::fileExists($path . '/TestClass.php')); // no path
 		
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::fileExists
+	 * @covers \Framework\Autoloader\Autoloader::fileExists
 	 */
 	public function testFileExists_False() {
 		$this->assertFalse(Autoloader::fileExists('NotAFile.php'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::classLoader
+	 * @covers \Framework\Autoloader\Autoloader::classLoader
 	 */
 	public function testClassLoader_NotHandledNamespace() {
 		$this->assertFalse($this->autoloader->classLoader('\NotHandled\TestClass'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::classLoader
+	 * @covers \Framework\Autoloader\Autoloader::classLoader
 	 */
 	public function testClassLoader_Top() {
 		$this->assertTrue($this->autoloader->classLoader('\UnitTesting\TestClass'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::classLoader
+	 * @covers \Framework\Autoloader\Autoloader::classLoader
 	 */
 	public function testClassLoader_Nested() {
 		$this->assertTrue($this->autoloader->classLoader('\UnitTesting\Folder\TestClass2'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::classLoader
+	 * @covers \Framework\Autoloader\Autoloader::classLoader
 	 */
 	public function testClassLoader_Pattern() {
 		$this->assertTrue($this->autoloader->classLoader('\UnitTesting\NS1\NS2\TestClass3'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::classLoader
+	 * @covers \Framework\Autoloader\Autoloader::classLoader
 	 */
 	public function testClassLoader_PatternNoClass() {
 		$this->assertFalse($this->autoloader->classLoader('\UnitTesting\NS1\NS2\TestClass99'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::classLoader
+	 * @covers \Framework\Autoloader\Autoloader::classLoader
 	 */
 	public function testClassLoader_SkipNonFramework() {
 		$this->assertFalse($this->autoloader->classLoader('NOT_A_CLASS\UnitTesting\TestClass'));
 	}
 	
 	/**
-	 * @covers \Framework\Autoloader::addNamespace
-	 * @covers \Framework\Autoloader::clearNamespace
-	 * @covers \Framework\Autoloader::getNamespaceMap
+	 * @covers \Framework\Autoloader\Autoloader::addNamespace
+	 * @covers \Framework\Autoloader\Autoloader::clearNamespace
+	 * @covers \Framework\Autoloader\Autoloader::getNamespaceMap
 	 */
 	public function testAddClearGetNamespaceMap() {
 		$autoloader = new Autoloader();

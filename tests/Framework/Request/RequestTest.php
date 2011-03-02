@@ -6,17 +6,20 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
+namespace Framework\Tests\Request;
+
 use
-	\Framework\Request,
-	\Framework\Session,
-	\Framework\View
+	\Framework\Request\Request,
+	\Framework\Controller\Controller,
+	\Framework\Session\Session,
+	\Framework\View\View
 ;
 
-class Request_Test extends PHPUnit_Framework_TestCase {
+class Request_Test extends \PHPUnit_Framework_TestCase {
 	
 	/**
-	 * @covers \Framework\Request::addUrlPatterns
-	 * @covers \Framework\Request::getUrlPatternMap
+	 * @covers \Framework\Request\Request::addUrlPatterns
+	 * @covers \Framework\Request\Request::getUrlPatternMap
 	 */
 	public function testAddUrlPatterns_valid() {
 		$request = new Request();
@@ -45,12 +48,12 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addUrlPatterns
-	 * @covers \Framework\Request::getUrlPatternMap
+	 * @covers \Framework\Request\Request::addUrlPatterns
+	 * @covers \Framework\Request\Request::getUrlPatternMap
 	 */
 	public function testAddUrlPatterns_validArray() {
 		$request = new Request();
-		$controller = new TestController($request, new \Framework\View());
+		$controller = new TestController($request, new View());
 		
 		$request->addUrlPatterns(array('abc' => array($controller, 'testAction')));
 		
@@ -63,7 +66,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addUrlPatterns
+	 * @covers \Framework\Request\Request::addUrlPatterns
 	 * @expectedException \Framework\Request\Exception
 	 */
 	public function testAddUrlPatterns_invalidPattern() {
@@ -72,7 +75,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addUrlPatterns
+	 * @covers \Framework\Request\Request::addUrlPatterns
 	 * @expectedException \Framework\Request\Exception
 	 */
 	public function testAddUrlPatterns_invalidHandler() {
@@ -81,7 +84,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addUrlPatterns
+	 * @covers \Framework\Request\Request::addUrlPatterns
 	 * @expectedException \Framework\Request\Exception
 	 */
 	public function testAddUrlPatterns_invalidHandlerString() {
@@ -90,7 +93,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::resolveUrl
+	 * @covers \Framework\Request\Request::resolveUrl
 	 * @expectedException \Framework\Request\Exception
 	 */
 	public function testResolveUrl_NoUrlNoAutoFind() {
@@ -99,7 +102,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::resolveUrl
+	 * @covers \Framework\Request\Request::resolveUrl
 	 */
 	public function testResolveUrl_TestGlobalsPATH_INFO() {
 		$request = new Request();
@@ -119,7 +122,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::resolveUrl
+	 * @covers \Framework\Request\Request::resolveUrl
 	 */
 	public function testResolveUrl_TestGlobalsREQUEST_URI() {
 		$request = new Request();
@@ -140,7 +143,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::resolveUrl
+	 * @covers \Framework\Request\Request::resolveUrl
 	 */
 	public function testResolveUrl_NoMatch() {
 		$request = new Request();
@@ -150,7 +153,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::resolveUrl
+	 * @covers \Framework\Request\Request::resolveUrl
 	 */
 	public function testResolveUrl_Params() {
 		$request = new Request();
@@ -170,8 +173,8 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::setParams
-	 * @covers \Framework\Request::getParams
+	 * @covers \Framework\Request\Request::setParams
+	 * @covers \Framework\Request\Request::getParams
 	 */
 	public function testSetParams_GETOnly() {
 		$request = new Request();
@@ -188,9 +191,9 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addParam
-	 * @covers \Framework\Request::setParams
-	 * @covers \Framework\Request::getParams
+	 * @covers \Framework\Request\Request::addParam
+	 * @covers \Framework\Request\Request::setParams
+	 * @covers \Framework\Request\Request::getParams
 	 */
 	public function testSetParams_AddGETAndPOST() {
 		$request = new Request();
@@ -219,8 +222,8 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addParam
-	 * @covers \Framework\Request::getParam
+	 * @covers \Framework\Request\Request::addParam
+	 * @covers \Framework\Request\Request::getParam
 	 */
 	public function testSetParams_GetParamExists() {
 		$request = new Request();
@@ -230,8 +233,8 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addParam
-	 * @covers \Framework\Request::getParam
+	 * @covers \Framework\Request\Request::addParam
+	 * @covers \Framework\Request\Request::getParam
 	 */
 	public function testSetParams_GetParamNotExists() {
 		$request = new Request();
@@ -241,8 +244,8 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::addParam
-	 * @covers \Framework\Request::hasParam
+	 * @covers \Framework\Request\Request::addParam
+	 * @covers \Framework\Request\Request::hasParam
 	 */
 	public function testHasParams() {
 		$request = new Request();
@@ -254,7 +257,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::getReferrer
+	 * @covers \Framework\Request\Request::getReferrer
 	 */
 	public function testGetReferrer_NotFound() {
 		$request = new Request();
@@ -265,7 +268,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::getReferrer
+	 * @covers \Framework\Request\Request::getReferrer
 	 */
 	public function testGetReferrer_Global() {
 		$request = new Request();
@@ -275,8 +278,8 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::getReferrer
-	 * @covers \Framework\Request::setReferrer
+	 * @covers \Framework\Request\Request::getReferrer
+	 * @covers \Framework\Request\Request::setReferrer
 	 */
 	public function testSetReferrerGetReferrer_Session() {
 		Session::close();
@@ -293,7 +296,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::isAjax
+	 * @covers \Framework\Request\Request::isAjax
 	 */
 	public function testIsAjax_IsNot() {
 		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'notajax';
@@ -302,7 +305,7 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::isAjax
+	 * @covers \Framework\Request\Request::isAjax
 	 */
 	public function testIsAjax_Is() {
 		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';
@@ -310,13 +313,13 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::beginRequest
+	 * @covers \Framework\Request\Request::beginRequest
 	 */
 	public function testBeginRequest_FullMock() {
 		$request = new Request();
-		$view = $this->getMock('\Framework\View', array('render'));
+		$view = $this->getMock('\Framework\View\View', array('render'));
 		$controller = $this->getMock(
-			'TestController',
+			'\Framework\Tests\Request\TestController',
 			array(
 				'_preInit',
 				'_init',
@@ -351,17 +354,17 @@ class Request_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Request::beginRequest
+	 * @covers \Framework\Request\Request::beginRequest
 	 */
 	public function testBeginRequest_ConstructClass() {
 		$request = new Request();
 		$view = new View();
-		$request->addUrlPatterns(array('/abc/' => 'TestController.testAction'));
+		$request->addUrlPatterns(array('/abc/' => '\Framework\Tests\Request\TestController.testAction'));
 		$request->beginRequest('abc');
 	}
 	
 }
 
-class TestController extends \Framework\Controller {
+class TestController extends Controller {
 	public function testAction(){}
 }

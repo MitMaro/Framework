@@ -59,14 +59,14 @@
  * '/path/to/MyProject/modules/Admin/controllers/AccessControl.php' instead of
  * '/path/to/MyProject/modules/Admin/AccessControl.php'.
  * 
- * @package  Framework\AccessControl
+ * @package  Framework\Autoloader
  * @version  0.1.0
  * @author  Tim Oram (mitmaro@mitmaro.ca)
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-namespace Framework;
+namespace Framework\Autoloader;
 
 class Autoloader {
 	

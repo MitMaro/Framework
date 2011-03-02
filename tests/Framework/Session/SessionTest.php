@@ -6,11 +6,13 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
+namespace Framework\Tests\Session;
+
 use
-	\Framework\Session
+	\Framework\Session\Session
 ;
 
-class Session_Test extends PHPUnit_Framework_TestCase {
+class Session_Test extends \PHPUnit_Framework_TestCase {
 	
 	public function setUp() {
 		Session::setNamespace('unittest');
@@ -19,8 +21,8 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::init
-	 * @covers \Framework\Session::__construct
+	 * @covers \Framework\Session\Session::init
+	 * @covers \Framework\Session\Session::__construct
 	 */
 	public function testInit() {
 		// make sure the session is not started
@@ -28,8 +30,8 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::close
-	 * @covers \Framework\Session::__destruct
+	 * @covers \Framework\Session\Session::close
+	 * @covers \Framework\Session\Session::__destruct
 	 */
 	public function testClose() {
 		Session::close();
@@ -39,8 +41,8 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::setNamespace
-	 * @covers \Framework\Session::getNamespace
+	 * @covers \Framework\Session\Session::setNamespace
+	 * @covers \Framework\Session\Session::getNamespace
 	 */
 	public function testSetNamespace() {
 		Session::setNamespace('newnamespace');
@@ -48,7 +50,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::pushOnce
+	 * @covers \Framework\Session\Session::pushOnce
 	 */
 	public function testPushOnce() {
 		$_SESSION['unittest']['__once__'] = array('__namespace__' => array('abc' => '1'));
@@ -59,7 +61,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::getOnce
+	 * @covers \Framework\Session\Session::getOnce
 	 */
 	public function testGetOnce() {
 		$_SESSION['unittest']['__once__']['__namespace__'] = array('a' => '1');
@@ -69,7 +71,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	
 	
 	/**
-	 * @covers \Framework\Session::get
+	 * @covers \Framework\Session\Session::get
 	 */
 	public function testGet() {
 		$_SESSION['unittest']['__namespace__'] = array('a' => '1');
@@ -78,7 +80,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::getAllOnceValues
+	 * @covers \Framework\Session\Session::getAllOnceValues
 	 */
 	public function testGetAllOnceValues() {
 		$_SESSION['unittest']['__once__']['__namespace__'] = array('a' => '1');
@@ -87,7 +89,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::getAllValues
+	 * @covers \Framework\Session\Session::getAllValues
 	 */
 	public function testGetAllValues() {
 		$_SESSION['unittest']['__namespace__'] = array('a' => '1');
@@ -96,7 +98,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::reset
+	 * @covers \Framework\Session\Session::reset
 	 */
 	public function testReset() {
 		$_SESSION['unittest']['__namespace__'] = array('abc' => '1');
@@ -109,7 +111,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::set
+	 * @covers \Framework\Session\Session::set
 	 */
 	public function testSet() {
 		Session::set(null, '1');
@@ -123,7 +125,7 @@ class Session_Test extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\Session::setOnce
+	 * @covers \Framework\Session\Session::setOnce
 	 */
 	public function testSetOnce() {
 		Session::setOnce(null, '1');

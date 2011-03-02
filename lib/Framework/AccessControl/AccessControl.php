@@ -1,16 +1,17 @@
 <?php
 /**
- * @package  Framework
+ * @package  Framework\AccessControl
  * @version  0.1.0
  * @author  Tim Oram (mitmaro@mitmaro.ca)
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-namespace Framework;
+namespace Framework\AccessControl;
 
 use
-	Framework\AccessControl\Assertion\AssertionInterface
+	Framework\AccessControl\Assertion\AssertionInterface,
+	Framework\AccessControl\Exception\InvalidAssertion
 ;
 
 class AccessControl {
@@ -53,7 +54,7 @@ class AccessControl {
 				$name = $assertion;
 				$assertion = $this->assertions[$assertion];
 			} else {
-				throw new AccessControl\Exception\InvalidAssertion("Assertion could not be found");
+				throw new InvalidAssertion("Assertion could not be found");
 			}
 		} else {
 			$name = get_class($assertion);

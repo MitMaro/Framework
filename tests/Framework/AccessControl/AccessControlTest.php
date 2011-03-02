@@ -6,17 +6,17 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-namespace Framework\Tests;
+namespace Framework\Tests\AccessControl;
 
 use
-	Framework\AccessControl,
+	Framework\AccessControl\AccessControl,
 	Framework\AccessControl\Assertion\AssertionInterface
 ;
 
 class AccessControl_test extends \PHPUnit_Framework_TestCase {
 	
 	/**
-	 * @covers \Framework\AccessControl::addAssertion
+	 * @covers \Framework\AccessControl\AccessControl::addAssertion
 	 */
 	public function test_addAssertion_class() {
 		
@@ -26,17 +26,17 @@ class AccessControl_test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::addAssertion
+	 * @covers \Framework\AccessControl\AccessControl::addAssertion
 	 */
 	public function test_addAssertion_name() {
 		
 		$accessControl = new AccessControl();
 		
-		$accessControl->addAssertion('test', 'Framework\Tests\TestTrueAssertion');
+		$accessControl->addAssertion('test', 'Framework\Tests\AccessControl\TestTrueAssertion');
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::isAllowed
+	 * @covers \Framework\AccessControl\AccessControl::isAllowed
 	 */
 	public function test_isAllowed_named() {
 		
@@ -48,7 +48,7 @@ class AccessControl_test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::isAllowed
+	 * @covers \Framework\AccessControl\AccessControl::isAllowed
 	 */
 	public function test_isAllowed_class() {
 		
@@ -58,7 +58,7 @@ class AccessControl_test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\AccessControl::isAllowed
+	 * @covers \Framework\AccessControl\AccessControl::isAllowed
 	 * @expectedException \Framework\AccessControl\Exception\InvalidAssertion
 	 */
 	public function test_isAllowed_exceptions() {

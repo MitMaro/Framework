@@ -1,6 +1,6 @@
 <?php
 /**
- * @package  Framework
+ * @package  Framework\Request
  * @version  0.1.0
  * @author  Tim Oram (mitmaro@mitmaro.ca)
  * @copyright  Copyright 2010 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
@@ -12,7 +12,12 @@
  * </ul>
  */
 
-namespace Framework;
+namespace Framework\Request;
+
+use
+	\Framework\Session\Session,
+	\Framework\View\View
+;
 
 class Request {
 
@@ -80,7 +85,7 @@ class Request {
 			
 			// valid pattern
 			if (!is_string($pattern)) {
-				throw new Request\Exception('The pattern provided is invalid, must be a valid regular expression');
+				throw new Exception('The pattern provided is invalid, must be a valid regular expression');
 			}
 			
 			if (is_array($handler)) {
@@ -90,12 +95,12 @@ class Request {
 				$parts = explode('.', $handler);
 			}
 			else {
-				throw new Request\Exception('The handler provided is invalid.');
+				throw new Exception('The handler provided is invalid.');
 			}
 			
 			// valid handler
 			if (count($parts) != 2) {
-				throw new Request\Exception('The handler provided is invalid.');
+				throw new Exception('The handler provided is invalid.');
 			}
 			$this->url_maps[$pattern] = array('class' => $parts[0], 'method' => $parts[1]);
 		}
@@ -126,7 +131,7 @@ class Request {
 				$url = $_SERVER['REQUEST_URI'];
 			}
 			else {
-				throw new Request\Exception('Was unable to retrive URL from _SERVER super global');
+				throw new Exception('Was unable to retrive URL from _SERVER super global');
 			}
 		}
 		
@@ -208,7 +213,7 @@ class Request {
 		// try the one stored by this application first
 		
 		// merge in pushed over request params when supplied
-		if (class_exists('\Framework\Session')) {
+		if (class_exists('\Framework\Session\Session')) {
 			$referrer = Session::getOnce('referrer', false, '__FRAMEWORK__');
 			if ($referrer) {
 				return $referrer;

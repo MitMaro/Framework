@@ -16,7 +16,7 @@ set_include_path(
 );
 
 
-require_once 'Framework/Autoloader.php';
-$autoloader = new \Framework\Autoloader();
+require_once 'Framework/Autoloader/Autoloader.php';
+$autoloader = new \Framework\Autoloader\Autoloader();
 $autoloader->addNamespace('Framework', 'Framework/');
 spl_autoload_register(array($autoloader, 'classLoader'));
