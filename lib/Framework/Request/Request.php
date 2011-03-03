@@ -41,7 +41,7 @@ class Request {
 		$callback = $this->resolveUrl($url);
 		$this->setParams();
 		
-		if (class_exists('\Framework\Session')) {
+		if (class_exists('\Framework\Session\Session')) {
 			$this->setReferrer($url);
 		}
 		
