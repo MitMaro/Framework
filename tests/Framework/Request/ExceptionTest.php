@@ -5,16 +5,16 @@
  * @copyright  Copyright 2011 Tim Oram (<a href="http://www.mitmaro.ca">www.mitmaro.ca</a>)
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
-namespace Framework\Test\AccessControl;
+namespace Framework\Test\Request;
 
 use
-	Framework\AccessControl\Exception
+	Framework\Request\Exception
 ;
 
 class Exception_Test extends \PHPUnit_Framework_TestCase {
 	
 	/**
-	 * @covers \Framework\AccessControl\Exception
+	 * @covers \Framework\Request\Exception
 	 */
 	public function testAll() {
 		new Exception();
