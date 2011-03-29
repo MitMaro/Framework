@@ -7,12 +7,18 @@
  * @license  <a href="http://www.opensource.org/licenses/mit-license.php">The MIT License</a>
  */
 
-require 'config.php';
+// provides $cfg array
+// use config.php unless it is not found, then fall back to the distributed file
+if (file_exists(__DIR__ . '/config.php')) {
+	require_once 'config.php';
+} else {
+	require_once 'config.dist.php';
+}
 
 // add site's server path (root) to include path
 set_include_path(
 	realpath($cfg['project_root']) . PATH_SEPARATOR .
-	$cfg['pear_path']
+	get_include_path()
 );
 
 
@@ -20,3 +26,5 @@ require_once 'Framework/Autoloader/Autoloader.php';
 $autoloader = new \Framework\Autoloader\Autoloader();
 $autoloader->addNamespace('Framework', 'Framework/');
 spl_autoload_register(array($autoloader, 'classLoader'));
+
+date_default_timezone_set('America/St_Johns');

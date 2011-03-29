@@ -14,5 +14,4 @@
 $cfg = array();
 
 // path info
-$cfg['project_root'] = '';
-$cfg['pear_path'] = '';
+$cfg['project_root'] = realpath(__DIR__ . '/../lib/');
