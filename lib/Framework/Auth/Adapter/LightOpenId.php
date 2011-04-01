@@ -99,21 +99,21 @@ class LightOpenId extends \LightOpenId implements AdapterInterface {
 	 *
 	 * @throws ErrorException if curl_init or https stream doesn't exist
 	 */
-	public function __construct($data = null, $trustRoot = null, $returnUrl = null) {
+	public function __construct($data = null, $trust_root = null, $return_url = null) {
 		// this constructor completely overrides the LightOpenId constructor to remove
 		// the dependency on _GET, _POST and _SERVER
 		
-		if (is_null($trustRoot)) {
+		if (is_null($trust_root)) {
 			$this->trustRoot = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
 		} else {
-			$this->trustRoot = $trustRoot;
+			$this->trustRoot = $trust_root;
 		}
 		
-		if (is_null($returnUrl)) {
+		if (is_null($return_url)) {
 			$uri = rtrim(preg_replace('#((?<=\?)|&)openid\.[^&]+#', '', $_SERVER['REQUEST_URI']), '?');
 			$this->returnUrl = $this->trustRoot . $uri;
 		} else {
-			$this->returnUrl = $returnUrl;
+			$this->returnUrl = $return_url;
 		}
 		
 		// if not data was provided, use the GET and POST super global
