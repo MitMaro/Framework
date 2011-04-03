@@ -41,6 +41,7 @@ class Request {
 		$callback = $this->resolveUrl($url);
 		$this->setParams();
 		
+		// set the referrer in the session if sessions is enabled
 		if (class_exists('\Framework\Session\Session')) {
 			$this->setReferrer($url);
 		}
@@ -78,7 +79,7 @@ class Request {
 	 *
 	 * @param array $patterns An array of key value pairs in the form (pattern => class.method)
 	 */
-	public function addUrlPatterns($patterns) {
+	public function addUrlPatterns(array $patterns) {
 		
 		// loop over the array of key value pairs, validating and adding to the url map
 		foreach ($patterns as $pattern => $handler) {
