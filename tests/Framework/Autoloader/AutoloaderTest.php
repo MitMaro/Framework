@@ -8,21 +8,23 @@
  * @license    http://www.opensource.org/licenses/mit-license.php  The MIT License
  */
 
+namespace Framework\Tests\Autoloader;
+
 use
 	\Framework\Autoloader\Autoloader
 ;
 
-class Autoloader_Test extends PHPUnit_Framework_TestCase {
+class Autoloader_Test extends \PHPUnit_Framework_TestCase {
 	
 	public function setUp() {
 		$this->autoloader = new Autoloader();
 		$this->autoloader->addNamespace(
 			'UnitTesting',
-			realpath(__DIR__ . '/../../data/autoloader/UnitTesting/')
+			realpath(__DIR__ . '/../../data/Autoloader/UnitTesting/')
 		);
 		$this->autoloader->addNamespace(
 			'UnitTesting',
-			realpath(__DIR__ . '/../../data/autoloader/UnitTesting') . '/:2/:1'
+			realpath(__DIR__ . '/../../data/Autoloader/UnitTesting') . '/:2/:1'
 		);
 	}
 	
@@ -31,11 +33,11 @@ class Autoloader_Test extends PHPUnit_Framework_TestCase {
 	 */
 	public function testFileExists_True() {
 		$oldPath = get_include_path();
-		set_include_path(realpath(__DIR__ . '/../../data/autoloader') . ':' . $oldPath);
+		set_include_path(realpath(__DIR__ . '/../../data/Autoloader') . ':' . $oldPath);
 		$this->assertTrue(Autoloader::fileExists('/TestFile.php')); // with path
 		set_include_path($oldPath);
 		
-		$path = realpath(__DIR__ . '/../../data/autoloader/UnitTesting/');
+		$path = realpath(__DIR__ . '/../../data/Autoloader/UnitTesting/');
 		$this->assertTrue(Autoloader::fileExists($path . '/TestClass.php')); // no path
 		
 	}
