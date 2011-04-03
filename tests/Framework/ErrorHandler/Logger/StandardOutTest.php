@@ -83,7 +83,7 @@ class StandardOut_Test extends \PHPUnit_Framework_TestCase {
 		
 		# replace date
 		$result = preg_replace(
-			'#[0-9]{1,2}:[0-9]{2}:[0-9]{2} am|pm#i',
+			'/[0-9]{1,2}:[0-9]{2}:[0-9]{2} [ap]m/i',
 			'12:01:01 am',
 			$result
 		);
@@ -162,7 +162,7 @@ class StandardOut_Test extends \PHPUnit_Framework_TestCase {
 		
 		# replace date
 		$result = preg_replace(
-			'#[0-9]{1,2}:[0-9]{2}:[0-9]{2} am|pm#i',
+			'/[0-9]{1,2}:[0-9]{2}:[0-9]{2} [ap]m/i',
 			'12:01:01 am',
 			$result
 		);
