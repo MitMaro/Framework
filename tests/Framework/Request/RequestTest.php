@@ -358,7 +358,6 @@ class Request_Test extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testBeginRequest_ConstructClass() {
 		$request = new Request();
-		$view = new View();
 		$request->addUrlPatterns(array('/abc/' => '\Framework\Tests\Request\TestController.testAction'));
 		$request->beginRequest('abc');
 	}
@@ -366,5 +365,8 @@ class Request_Test extends \PHPUnit_Framework_TestCase {
 }
 
 class TestController extends Controller {
-	public function testAction(){}
+	
+	public function testAction() {
+		$this->getView()->setTemplate(realpath(__DIR__ . '/../../data/Request/template.tmpl'));
+	}
 }
