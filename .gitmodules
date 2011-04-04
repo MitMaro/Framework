@@ -1,3 +1,6 @@
 [submodule "vendor/lightopenid"]
 	path = vendor/lightopenid
 	url = git://gitorious.org/lightopenid/lightopenid.git
+[submodule "vendor/dwoo"]
+	path = vendor/dwoo
+	url = git://github.com/Seldaek/Dwoo.git
