@@ -12,7 +12,8 @@ namespace Framework\View;
 use
 	Framework\View\Renderer\Php,
 	Framework\View\Renderer\RendererInterface,
-	Framework\View\Data,
+	Framework\View\Data\Data,
+	Framework\View\Data\DataInterface,
 	Framework\View\Exception
 ;
 
@@ -37,7 +38,7 @@ class View {
 	 * @param RendererInterface $renderer (Optional, Defualt: Php) The template renderer
 	 * @param Data $data (Optional) The data provider
 	 */
-	public function __construct(RendererInterface $renderer = null, Data $data = null) {
+	public function __construct(RendererInterface $renderer = null, DataInterface $data = null) {
 		
 		if (is_null($renderer)) {
 			$this->renderer = new Php();
@@ -72,6 +73,24 @@ class View {
 	 */
 	public function setTemplate($template) {
 		$this->template = $template;
+	}
+	
+	/**
+	 * Get the renderer
+	 *
+	 * @return RendererInterface
+	 */
+	public function getRenderer() {
+		return $this->renderer;
+	}
+	
+	/**
+	 * Get the renderer
+	 *
+	 * @return RendererInterface
+	 */
+	public function setRenderer(RendererInterface $renderer) {
+		$this->renderer = $renderer;
 	}
 	
 	/**

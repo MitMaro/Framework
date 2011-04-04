@@ -11,14 +11,14 @@
 namespace Framework\Tests\View;
 
 use
-	Framework\View\Data
+	Framework\View\Data\Data
 ;
 
 class Data_Test extends \PHPUnit_Framework_TestCase {
 	
 	/**
-	 * @covers \Framework\View\Data::__get
-	 * @covers \Framework\View\Data::__set
+	 * @covers \Framework\View\Data\Data::__get
+	 * @covers \Framework\View\Data\Data::__set
 	 */
 	public function test_getSet() {
 		$data = new Data();
@@ -31,7 +31,7 @@ class Data_Test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\View\Data::offsetExists
+	 * @covers \Framework\View\Data\Data::offsetExists
 	 */
 	public function test_offsetExists() {
 		$data = new Data();
@@ -43,7 +43,7 @@ class Data_Test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\View\Data::offsetGet
+	 * @covers \Framework\View\Data\Data::offsetGet
 	 */
 	public function test_offsetGet() {
 		$data = new Data();
@@ -55,7 +55,7 @@ class Data_Test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\View\Data::offsetUnset
+	 * @covers \Framework\View\Data\Data::offsetUnset
 	 */
 	public function test_offsetUnset() {
 		$data = new Data();
@@ -72,7 +72,7 @@ class Data_Test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\View\Data::offsetSet
+	 * @covers \Framework\View\Data\Data::offsetSet
 	 */
 	public function test_offsetSet() {
 		$data = new Data();
@@ -85,7 +85,7 @@ class Data_Test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @covers \Framework\View\Data::toArray
+	 * @covers \Framework\View\Data\Data::toArray
 	 */
 	public function test_toArray() {
 		$data = new Data();

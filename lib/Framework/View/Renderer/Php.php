@@ -10,7 +10,7 @@
 namespace Framework\View\Renderer;
 
 use
-	Framework\View\Data,
+	Framework\View\Data\DataInterface,
 	Framework\View\Exception
 ;
 
@@ -23,7 +23,7 @@ class Php implements RendererInterface {
 	 * @param Data $data The data provider
 	 * @throws Exception\Renderer if the template does not exist
 	 */
-	public function render($template, Data $data) {
+	public function render($template, DataInterface $data) {
 		
 		// have all the 
 		foreach ($data->toArray() as $key => $value) {

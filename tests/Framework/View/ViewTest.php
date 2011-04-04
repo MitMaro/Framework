@@ -13,7 +13,8 @@ namespace Framework\Tests\View;
 use
 	Framework\View\View,
 	Framework\View\Renderer\RendererInterface,
-	Framework\View\Data
+	Framework\View\Data\Data,
+	Framework\View\Data\DataInterface
 ;
 
 class View_Test extends \PHPUnit_Framework_TestCase {
@@ -60,6 +61,17 @@ class View_Test extends \PHPUnit_Framework_TestCase {
 	}
 	
 	/**
+	 * @covers \Framework\View\View::setRenderer
+	 * @covers \Framework\View\View::getRenderer
+	 */
+	public function test_getSetRenderer() {
+		$view = new View();
+		$view->setRenderer(new TestRenderer());
+		$this->assertEquals('Framework\Tests\View\TestRenderer', get_class($view->getRenderer()));
+		
+	}
+	
+	/**
 	 * @covers \Framework\View\View::render
 	 * @expectedException \Framework\View\Exception\View
 	 */
@@ -85,7 +97,7 @@ class View_Test extends \PHPUnit_Framework_TestCase {
 
 
 class TestRenderer implements RendererInterface {
-	public function render($template, Data $data) {
+	public function render($template, DataInterface $data) {
 		
 		$data_string = '';
 		

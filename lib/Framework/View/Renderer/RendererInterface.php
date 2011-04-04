@@ -10,7 +10,7 @@
 namespace Framework\View\Renderer;
 
 use
-	Framework\View\Data
+	Framework\View\Data\DataInterface
 ;
 
 interface RendererInterface {
@@ -21,6 +21,6 @@ interface RendererInterface {
 	 * @param mixed $template The template
 	 * @param Data $data The data
 	 */
-	public function render($template, Data $data);
+	public function render($template, DataInterface $data);
 	
 }

@@ -11,7 +11,7 @@
 namespace Framework\Tests\View\Renderer;
 
 use
-	Framework\View\Data,
+	Framework\View\Data\Data,
 	Framework\View\Renderer\Php
 ;
 
